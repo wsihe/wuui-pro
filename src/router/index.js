@@ -10,7 +10,7 @@ export default new Router({
       path: '/',
       name: 'root',
       redirect: '/home/index',
-      meta: {},
+      meta: {}
     },
     {
       path: '/home',
