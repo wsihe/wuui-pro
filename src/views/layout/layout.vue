@@ -1,6 +1,12 @@
 <template>
-  <div id="app">
-    <router-view/>
+  <div class="wu-layout">
+    <div class="wu-layout-sider"></div>
+    <div class="wu-layout">
+      <div class="wu-layout-header"></div>
+      <div class="wu-layout-content">
+        <router-view/>
+      </div>
+    </div>
   </div>
 </template>
 

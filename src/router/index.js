@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../views/Home.vue'
-import About from '../views/About.vue'
+import Layout from '@/views/layout/layout'
 
 Vue.use(Router)
 
@@ -9,13 +8,28 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'root',
+      redirect: '/home/index',
+      meta: {},
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About
+      path: '/home',
+      component: Layout,
+      redirect: '/home/index',
+      children: [
+        {
+          path: 'index',
+          name: 'home_index',
+          component: () => import('@/views/Home.vue'),
+          meta: { title: 'home', icon: 'home' }
+        },
+        {
+          path: 'about',
+          name: 'about',
+          component: () => import('@/views/About.vue'),
+          meta: { title: 'about', icon: 'about' }
+        }
+      ]
     }
   ]
 })
