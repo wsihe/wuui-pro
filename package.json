@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "element-ui": "^2.4.5",
     "moment": "^2.22.2",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
@@ -24,8 +25,12 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.0.1",
     "mockjs": "^1.0.1-beta3",
+    "node-sass": "^4.9.2",
+    "sass-loader": "^7.0.3",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "vue-cli-plugin-element": "^1.0.0",
+    "vue-cli-plugin-pug": "^1.0.5",
     "vue-template-compiler": "^2.5.16"
   }
 }

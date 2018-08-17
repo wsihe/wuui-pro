@@ -1,5 +1,5 @@
 <template lang="pug">
-  .login 登陆
+  .view.view-tpl
 </template>
 
 <script>
@@ -28,8 +28,6 @@
 </script>
 
 <style lang="stylus">
-  .login
+  .view-tpl
     display block
-    text-align center
-    padding-top 112px
 </style>

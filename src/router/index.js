@@ -13,6 +13,13 @@ export default new Router({
       meta: {}
     },
     {
+      path: '/login',
+      name: 'login',
+      title: '登录',
+      meta: {},
+      component: () => import('@/views/login.vue'),
+    },
+    {
       path: '/home',
       component: Layout,
       redirect: '/home/index',

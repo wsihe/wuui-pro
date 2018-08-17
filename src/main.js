@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import initFilters from './filters'
 import initDirectives from './directives'
+import './plugins/element.js'
 
 Vue.config.productionTip = false
 
