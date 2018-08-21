@@ -11,3 +11,5 @@ const store = new Vuex.Store({
     moduleB
   }
 })
+
+export default store
