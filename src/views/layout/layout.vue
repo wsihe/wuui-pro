@@ -1,11 +1,20 @@
 <template lang="pug">
-  div 主页
+  div(:class="[cls, siderCls]")
+    slot
 </template>
 
 <script>
 export default {
-  name: 'Layout',
+  name: 'wuLayout',
   props: {
+    type: {
+      type: String,
+      default: 'layout'
+    },
+    hasSider: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
@@ -18,6 +27,27 @@ export default {
   destroyed () {
   },
   computed: {
+    cls () {
+      let cls = 'wu-layout'
+      switch (this.type) {
+        case 'sider' :
+          cls = 'wu-layout-sider'
+          break
+        case 'header' :
+          cls = 'wu-layout-header'
+          break
+        case 'content' :
+          cls = 'wu-layout-content'
+          break
+        case 'footer' :
+          cls = 'wu-layout-footer'
+          break
+      }
+      return cls
+    },
+    siderCls () {
+      return this.hasSider ? 'wu-layout-has-sider' : ''
+    }
   },
   watch: {
   },
@@ -32,6 +62,8 @@ export default {
   $layout-prefix-cls = "wu-layout";
 
   .{$layout-prefix-cls}
+    min-height: 100vh;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     flex: auto;
@@ -62,12 +94,13 @@ export default {
       flex: auto;
 
     &-sider
+      flex: 0 0 256px;
+      max-width: 256px;
+      min-width: 256px;
+      width: 256px;
       transition: all .15s cubic-bezier(0.645, 0.045, 0.355, 1)
       position: relative;
       background: $layout-sider-background;
-
-      /* fix firefox can't set width smaller than content on flex item */
-      min-width: 0;
 
       &-has-trigger
         padding-bottom: $layout-trigger-height;

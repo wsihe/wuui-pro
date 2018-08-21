@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '@/views/layout/layout'
+import Main from '@/views/Main'
 
 Vue.use(Router)
 
@@ -17,23 +17,23 @@ export default new Router({
       name: 'login',
       title: '登录',
       meta: {},
-      component: () => import('@/views/login.vue'),
+      component: () => import('@/views/login.vue')
     },
     {
       path: '/home',
-      component: Layout,
+      component: Main,
       redirect: '/home/index',
       children: [
         {
           path: 'index',
           name: 'home_index',
-          component: () => import('@/views/Home.vue'),
+          component: () => import('@/views/home/Home.vue'),
           meta: { title: 'home', icon: 'home' }
         },
         {
           path: 'about',
           name: 'about',
-          component: () => import('@/views/About.vue'),
+          component: () => import('@/views//home/About.vue'),
           meta: { title: 'about', icon: 'about' }
         }
       ]
