@@ -11,23 +11,31 @@
           el-tab-pane(label="账户密码登录" name="account")
             el-form(:model="ruleForm" status-icon :rules="rules" ref="ruleForm")
               el-form-item(prop="pass")
-                el-input(type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="请输入内容")
+                el-input(type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="admin")
                   i(slot="prefix" class="el-input__icon el-icon-search")
               el-form-item()
-                el-input(placeholder="请输入内容", v-model="ruleForm.pass")
+                el-input(placeholder="888888", v-model="ruleForm.pass")
                   i(slot="prefix" class="el-input__icon el-icon-search")
           el-tab-pane(label="手机号登录" name="mobile")
             el-form(:model="ruleForm" status-icon :rules="rules" ref="ruleForm")
               el-form-item(prop="pass")
-                el-input(type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="请输入内容")
+                el-input(type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="请输入手机号")
                   i(slot="prefix" class="el-input__icon el-icon-search")
               el-form-item()
-                el-input(placeholder="请输入内容", v-model="ruleForm.pass")
-                  i(slot="prefix" class="el-input__icon el-icon-search")
+                el-row(:gutter="10")
+                  el-col(:span="16")
+                    el-input(placeholder="请输入验证码", v-model="ruleForm.pass")
+                      i(slot="prefix" class="el-input__icon el-icon-search")
+                  el-col(:span="8")
+                    el-button(:class="$style.button" v-if="!showCount", @click="onGetCaptcha") 获取验证码
+                    el-button(:class="$style.button" v-if="showCount", disabled) {{count}} s
         div
           el-checkbox(v-model="checked") 自动登陆
           el-button(:class="$style.right" type="text") 忘记密码
-        el-button(:class="$style.submit" type="primary",:loading="false") 登陆
+        el-button(:class="$style.submit" type="primary",:loading="false", @click="submit") 登陆
+    div(:class="$style.footer")
+      span Copyright
+      span(:class="$style.copyright") @ 2018 by river
 </template>
 
 <script>
@@ -55,7 +63,10 @@ export default {
         pass: [
           { validator: validatePass, trigger: 'blur' }
         ]
-      }
+      },
+
+      showCount: false,
+      count: 59
     }
   },
   created () {
@@ -69,6 +80,20 @@ export default {
   watch: {
   },
   methods: {
+    onGetCaptcha ()  {
+      this.showCount = true
+      this.count = 59
+      this.interval = setInterval(() => {
+        this.count -= 1
+        if (this.count === 0) {
+          this.showCount = false
+          clearInterval(this.interval)
+        }
+      }, 1000)
+    },
+    submit () {
+      this.$router.push({name: 'home_index'})
+    }
   }
 }
 </script>
@@ -77,7 +102,7 @@ export default {
   @import "~@/styles/define.styl"
 
   .right
-    vertical-align top
+    padding 0
     color #999
     float right
 
@@ -87,6 +112,11 @@ export default {
     height 100vh
     overflow auto
     background #f0f2f5
+
+    :global
+      .el-tabs .el-tabs__header
+        margin 0  auto 24px
+        width 194px
 
   .content
     padding 32px 0
@@ -124,30 +154,21 @@ export default {
   .main
     width 368px
     margin 0 auto
-    @media screen and (max-width: $screen-sm)
-      width 95%
 
-    .icon
-      font-size 24px
-      color rgba(0, 0, 0, 0.2)
-      margin-left 16px
-      vertical-align middle
-      cursor pointer
-      transition color 0.3s
-
-      &:hover
-        color $primary-color
-
-    .other
-      text-align left
-      margin-top 24px
-      line-height 22px
-
-      .register
-        float right
+  .button
+    width 100%
 
   .submit
     width 100%
     margin-top 24px
+
+  .footer
+    padding 0 16px
+    margin 48px 0 24px
+    text-align center
+
+  .copyright
+    color @text-color-secondary
+    font-size @font-size-base
 
 </style>
