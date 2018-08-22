@@ -1,10 +1,10 @@
 <template lang="pug">
-  .view.view-tpl
+  .header
 </template>
 
 <script>
 export default {
-  name: 'tpl',
+  name: 'header',
   components: {},
   props: {
   },
