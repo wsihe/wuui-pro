@@ -94,10 +94,6 @@ export default {
       flex auto
 
     &-sider
-      flex 0 0 256px
-      max-width 256px
-      min-width 256px
-      width 256px
       transition all .15s cubic-bezier(0.645, 0.045, 0.355, 1)
       position relative
       background $layout-sider-background
