@@ -4,6 +4,7 @@ found in element-ui/packages/theme-chalk/src/common/var.scss.
 For example, to overwrite the theme color:
 */
 $--color-primary: #40a9ff !default;
+$--font-weight-primary: 400 !default;
 
 /* icon font path, required */
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
