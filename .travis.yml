@@ -1,0 +1,20 @@
+language: node_js
+node_js: stable
+install:
+  - npm install
+script:
+  - npm run build
+after_script:
+  - cd ./dist
+  - git init
+  - git config user.name "wsihe"
+  - git config user.email "837606100@qq.com"
+  - git add .
+  - git commit -m "Update Wuui Pro"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+branches:
+  only:
+    - master
+env:
+ global:
+   - GH_REF: https://github.com/wsihe/pro.git
