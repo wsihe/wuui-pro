@@ -12,20 +12,20 @@
             el-form(:model="ruleForm" status-icon :rules="rules" ref="ruleForm")
               el-form-item(prop="pass")
                 el-input(type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="admin")
-                  i(slot="prefix" class="el-input__icon el-icon-search")
+                  i(slot="prefix" class="el-input__icon el-icon-service")
               el-form-item()
                 el-input(placeholder="888888", v-model="ruleForm.pass")
-                  i(slot="prefix" class="el-input__icon el-icon-search")
+                  i(slot="prefix" class="el-input__icon el-icon-setting")
           el-tab-pane(label="手机号登录" name="mobile")
             el-form(:model="ruleForm" status-icon :rules="rules" ref="ruleForm")
               el-form-item(prop="pass")
                 el-input(type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="请输入手机号")
-                  i(slot="prefix" class="el-input__icon el-icon-search")
+                  i(slot="prefix" class="el-input__icon el-icon-mobile-phone")
               el-form-item()
                 el-row(:gutter="10")
                   el-col(:span="16")
                     el-input(placeholder="请输入验证码", v-model="ruleForm.pass")
-                      i(slot="prefix" class="el-input__icon el-icon-search")
+                      i(slot="prefix" class="el-input__icon el-icon-message")
                   el-col(:span="8")
                     el-button(:class="$style.button" v-if="!showCount", @click="onGetCaptcha") 获取验证码
                     el-button(:class="$style.button" v-if="showCount", disabled) {{count}} s
@@ -80,7 +80,7 @@ export default {
   watch: {
   },
   methods: {
-    onGetCaptcha ()  {
+    onGetCaptcha () {
       this.showCount = true
       this.count = 59
       this.interval = setInterval(() => {
@@ -121,6 +121,10 @@ export default {
   .content
     padding 32px 0
     flex 1
+
+  @media (min-width: $screen-md-min)
+    .content
+      padding 112px 0 24px 0
 
   .top
     text-align center

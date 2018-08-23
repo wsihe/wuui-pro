@@ -1,19 +1,26 @@
 <template lang="pug">
   layout(has-sider)
-    layout(type="sider") sider
+    layout(type="sider")
+      wu-sider
     layout
-      layout(type="header") header
+      layout(type="header")
+        wu-header
       layout(type="content")
         router-view
-      layout(type="footer") footer
+      layout(type="footer")
+        wu-footer
 </template>
 
 <script>
 import layout from './layout/layout'
+import {wuFooter, wuHeader, wuSider} from './layout'
 export default {
   name: 'home',
   components: {
-    layout
+    layout,
+    wuSider,
+    wuHeader,
+    wuFooter
   }
 }
 </script>

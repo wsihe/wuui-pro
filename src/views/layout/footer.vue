@@ -1,10 +1,10 @@
 <template lang="pug">
-  .view.view-tpl
+  div(:class="$style.footer")
 </template>
 
 <script>
 export default {
-  name: 'tpl',
+  name: 'wuFooter',
   components: {},
   props: {
   },
@@ -27,7 +27,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-  .view-tpl
+<style lang="stylus" module>
+  .footer
     display block
 </style>
