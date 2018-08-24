@@ -9,7 +9,9 @@ const env = process.env.NODE_ENV || 'development'
 
 fs.writeFileSync(path.join(__dirname, './config/env.js'), `export default '${env}'`)
 
-const BASE_URL = '/'
+const BASE_URL = process.env.NODE_ENV === 'production'
+  ? '/pro'
+  : '/'
 
 module.exports = {
   baseUrl: BASE_URL,
