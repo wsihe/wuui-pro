@@ -17,4 +17,4 @@ branches:
     - master
 env:
  global:
-   - GH_REF: https://github.com/wsihe/pro.git
+   - GH_REF: github.com/wsihe/pro.git
