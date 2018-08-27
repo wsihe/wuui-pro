@@ -5,13 +5,13 @@
       span(:class="[$style.action, $style.noticeButton]")
         el-badge(:class="$style.badge", :value="100", :max="10")
           i.el-icon-bell
-      el-dropdown(size="medium")
+      el-dropdown(size="medium", @command="handleCommand")
         span(:class="[$style.action, $style.account]")
           img(:class="$style.avatar" src="~@/assets/avatar.jpg")
           span(:class="$style.name") river
         el-dropdown-menu(slot="dropdown")
           el-dropdown-item 个人中心
-          el-dropdown-item(divided) 退出登陆
+          el-dropdown-item(command="logout", divided) 退出登陆
 </template>
 
 <script>
@@ -35,6 +35,11 @@ export default {
   watch: {
   },
   methods: {
+    handleCommand (type) {
+      if (type === 'logout') {
+        this.$router.push({name: 'login'})
+      }
+    }
   }
 }
 </script>
