@@ -9,30 +9,31 @@
       div(:class="$style.main")
         el-tabs(:class="$style.tab" v-model="activeName")
           el-tab-pane(label="账户密码登录" name="account")
-            el-form(:model="ruleForm" status-icon :rules="rules" ref="ruleForm")
-              el-form-item(prop="pass")
-                el-input(type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="admin")
-                  i(slot="prefix" class="el-input__icon el-icon-service")
-              el-form-item()
-                el-input(placeholder="888888", v-model="ruleForm.pass")
-                  i(slot="prefix" class="el-input__icon el-icon-setting")
           el-tab-pane(label="手机号登录" name="mobile")
-            el-form(:model="ruleForm" status-icon :rules="rules" ref="ruleForm")
-              el-form-item(prop="pass")
-                el-input(type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="请输入手机号")
-                  i(slot="prefix" class="el-input__icon el-icon-mobile-phone")
-              el-form-item()
+          el-alert(v-if="!!errorText", :class="$style.alert", :title="errorText", type="error", show-icon, :closable="false")
+          el-form(:model="ruleForm", :rules="rules" ref="ruleForm")
+            template(v-if="activeName === 'account'")
+              el-form-item(prop="userName", key="userName")
+                el-input(v-model="ruleForm.userName", auto-complete="off", placeholder="admin")
+                  i.el-icon-edit-outline(slot="prefix")
+              el-form-item(prop="password", key="password")
+                el-input(v-model="ruleForm.password", auto-complete="off", placeholder="888888")
+                  i.el-icon-setting(slot="prefix")
+            template(v-if="activeName === 'mobile'")
+              el-form-item(prop="mobile", key="mobile")
+                el-input(v-model="ruleForm.mobile", auto-complete="off", placeholder="请输入手机号")
+                  i.el-icon-mobile-phone(slot="prefix")
+              el-form-item(prop="captcha", key="captcha")
                 el-row(:gutter="10")
                   el-col(:span="16")
-                    el-input(placeholder="请输入验证码", v-model="ruleForm.pass")
-                      i(slot="prefix" class="el-input__icon el-icon-message")
+                    el-input(v-model="ruleForm.captcha", auto-complete="off", placeholder="请输入验证码")
+                      i.el-icon-message(slot="prefix")
                   el-col(:span="8")
-                    el-button(:class="$style.button" v-if="!showCount", @click="onGetCaptcha") 获取验证码
-                    el-button(:class="$style.button" v-if="showCount", disabled) {{count}} s
+                    el-button(:class="$style.button", @click="onGetCaptcha", :disabled="!!count") {{captchaText}}
         div
           el-checkbox(v-model="checked") 自动登陆
           el-button(:class="$style.right" type="text") 忘记密码
-        el-button(:class="$style.submit" type="primary",:loading="false", @click="submit") 登陆
+        el-button(:class="$style.submit" type="primary",:loading="loading", @click="submitForm") 登陆
     div(:class="$style.footer")
       span Copyright
       span(:class="$style.copyright") @ 2018 by river
@@ -45,9 +46,11 @@ export default {
   props: {
   },
   data () {
-    let validatePass = (rule, value, callback) => {
+    let validateMobile = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'))
+        callback(new Error('请输入手机号'))
+      } else if (!/^1\d{10}$/.test(value)) {
+        callback(new Error('请输入正确的手机号!'))
       } else {
         callback()
       }
@@ -57,16 +60,29 @@ export default {
       checked: true,
 
       ruleForm: {
-        pass: ''
+        userName: '',
+        password: '',
+        mobile: '',
+        captcha: ''
       },
       rules: {
-        pass: [
-          { validator: validatePass, trigger: 'blur' }
+        userName: [
+          {required: true, trigger: 'change', message: '请输入用户名!'}
+        ],
+        password: [
+          {required: true, trigger: 'change', message: '请输入密码!'}
+        ],
+        mobile: [
+          {validator: validateMobile, trigger: 'change'}
+        ],
+        captcha: [
+          {required: true, trigger: 'change', message: '请输入验证码!'}
         ]
       },
 
-      showCount: false,
-      count: 59
+      count: 0,
+      loading: false,
+      errorText: ''
     }
   },
   created () {
@@ -76,23 +92,44 @@ export default {
   destroyed () {
   },
   computed: {
+    captchaText () {
+      return this.count ? this.count : '获取验证码'
+    }
   },
   watch: {
   },
   methods: {
     onGetCaptcha () {
-      this.showCount = true
       this.count = 59
       this.interval = setInterval(() => {
         this.count -= 1
         if (this.count === 0) {
-          this.showCount = false
           clearInterval(this.interval)
         }
       }, 1000)
     },
-    submit () {
-      this.$router.push({name: 'home_index'})
+    submitForm () {
+      this.$refs.ruleForm.validate((valid) => {
+        if (valid) {
+          this.onSubmit()
+        } else {
+          console.log('validate error !!')
+          return false
+        }
+      })
+    },
+    onSubmit () {
+      this.errorText = ''
+      this.loading = true
+      const { userName, password } = this.ruleForm
+      setTimeout(() => {
+        this.loading = false
+        if (userName !== 'admin' || password !== '888888') {
+          this.errorText = '账户或密码错误（admin/888888）'
+        } else {
+          this.$router.push({name: 'home_index'})
+        }
+      }, 500)
     }
   }
 }
@@ -158,6 +195,9 @@ export default {
   .main
     width 368px
     margin 0 auto
+
+  .alert
+    margin-bottom 24px
 
   .button
     width 100%
