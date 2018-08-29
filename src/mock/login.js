@@ -7,35 +7,45 @@ const USER_MAP = {
     token: 'super_admin'
   },
   admin: {
-    name: 'admin',
+    name: 'river',
     user_id: '2',
     access: ['admin'],
     token: 'admin'
   }
 }
 
-export const login = req => {
-  req = JSON.parse(req.body)
-  return {
-    code: 200,
-    data: {token: USER_MAP[req.userName].token},
-    msg: ''
-  }
-}
-
-export const getUserInfo = req => {
-  const params = getParams(req.url)
-  return {
-    code: 200,
-    data: USER_MAP[params.token],
-    msg: ''
-  }
-}
-
-export const logout = req => {
-  return {
-    code: 200,
-    data: null,
-    msg: ''
+export default {
+  login (request) {
+    request = JSON.parse(request.body)
+    if (request.username !== 'admin' || request.password !== '888888') {
+      return {
+        code: 200,
+        data: null,
+        msg: '账户或密码错误（admin/888888)'
+      }
+    }
+    return {
+      code: 200,
+      data: {
+        token: USER_MAP[request.username].token,
+        userName: USER_MAP[request.username].name
+      },
+      msg: ''
+    }
+  },
+  getUserInfo (request) {
+    const params = getParams(request.url)
+    return {
+      code: 200,
+      data: USER_MAP[params.token],
+      msg: ''
+    }
+  },
+  logout () {
+    return {
+      code: 200,
+      data: null,
+      msg: ''
+    }
   }
 }

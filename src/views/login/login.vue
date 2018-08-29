@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { login } from '@/services/user'
 export default {
   name: 'tpl',
   components: {},
@@ -111,25 +112,29 @@ export default {
     submitForm () {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.onSubmit()
+          this.onLogin()
         } else {
           console.log('validate error !!')
           return false
         }
       })
     },
-    onSubmit () {
-      this.errorText = ''
-      this.loading = true
-      const { userName, password } = this.ruleForm
-      setTimeout(() => {
+    async onLogin () {
+      try {
+        this.loading = true
+        this.errorText = ''
+        const { userName, password } = this.ruleForm
+        let res = await login(userName, password)
+        console.log(JSON.stringify(res))
         this.loading = false
-        if (userName !== 'admin' || password !== '888888') {
-          this.errorText = '账户或密码错误（admin/888888）'
-        } else {
+        if (res.code === 200 && res.data) {
           this.$router.push({name: 'home_index'})
+        } else {
+          this.errorText = res.msg
         }
-      }, 500)
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }

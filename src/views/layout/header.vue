@@ -10,11 +10,16 @@
           img(:class="$style.avatar" src="~@/assets/avatar.jpg")
           span(:class="$style.name") river
         el-dropdown-menu(slot="dropdown")
-          el-dropdown-item 个人中心
-          el-dropdown-item(command="logout", divided) 退出登陆
+          el-dropdown-item(disabled)
+            i.el-icon-setting(:class="$style.icon")
+            span 个人中心
+          el-dropdown-item(command="logout", divided)
+            i.el-icon-edit-outline(:class="$style.icon")
+            span 退出登陆
 </template>
 
 <script>
+import { logout } from '@/services/user'
 export default {
   name: 'wuHeader',
   components: {},
@@ -37,7 +42,17 @@ export default {
   methods: {
     handleCommand (type) {
       if (type === 'logout') {
-        this.$router.push({name: 'login'})
+        this.onLogout()
+      }
+    },
+    async onLogout () {
+      try {
+        let res = await logout()
+        if (res.code === 200) {
+          this.$router.push({name: 'login'})
+        }
+      } catch (err) {
+        console.log(err)
       }
     }
   }
@@ -120,6 +135,10 @@ export default {
         color $primary-color
         background rgba(255, 255, 255, 0.85)
         vertical-align middle
+
+  .icon
+    display inline-block
+    margin-right 8px
 
   @media only screen and (max-width: $screen-md)
     .header
