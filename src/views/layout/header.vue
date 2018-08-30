@@ -1,6 +1,6 @@
 <template lang="pug">
   div(:class="$style.header")
-    i.el-icon-menu(:class="[$style.action, $style.trigger]")
+    i.el-icon-menu(:class="[$style.action, $style.trigger]", @click="toggleSider")
     div(:class="$style.right")
       span(:class="[$style.action, $style.noticeButton]")
         el-badge(:class="$style.badge", :value="100", :max="10")
@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { logout } from '@/services/user'
 export default {
   name: 'wuHeader',
   components: {},
@@ -47,13 +46,14 @@ export default {
     },
     async onLogout () {
       try {
-        let res = await logout()
-        if (res.code === 200) {
-          this.$router.push({name: 'login'})
-        }
+        await this.$store.dispatch('Logout')
+        this.$router.push({name: 'login'})
       } catch (err) {
         console.log(err)
       }
+    },
+    toggleSider () {
+      this.$store.commit('TOGGLE_SIDER')
     }
   }
 }
