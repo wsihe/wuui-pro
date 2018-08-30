@@ -13,8 +13,8 @@
           el-alert(v-if="!!errorText", :class="$style.alert", :title="errorText", type="error", show-icon, :closable="false")
           el-form(:model="ruleForm", :rules="rules" ref="ruleForm")
             template(v-if="activeName === 'account'")
-              el-form-item(prop="userName", key="userName")
-                el-input(v-model="ruleForm.userName", auto-complete="off", placeholder="admin")
+              el-form-item(prop="username", key="username")
+                el-input(v-model="ruleForm.username", auto-complete="off", placeholder="admin")
                   i.el-icon-edit-outline(slot="prefix")
               el-form-item(prop="password", key="password")
                 el-input(v-model="ruleForm.password", auto-complete="off", placeholder="888888")
@@ -40,9 +40,8 @@
 </template>
 
 <script>
-import { login } from '@/services/user'
 export default {
-  name: 'tpl',
+  name: 'login',
   components: {},
   props: {
   },
@@ -61,13 +60,13 @@ export default {
       checked: true,
 
       ruleForm: {
-        userName: '',
+        username: '',
         password: '',
         mobile: '',
         captcha: ''
       },
       rules: {
-        userName: [
+        username: [
           {required: true, trigger: 'change', message: '请输入用户名!'}
         ],
         password: [
@@ -91,6 +90,7 @@ export default {
   mounted () {
   },
   destroyed () {
+    clearInterval(this.interval)
   },
   computed: {
     captchaText () {
@@ -119,22 +119,23 @@ export default {
         }
       })
     },
-    async onLogin () {
-      try {
-        this.loading = true
-        this.errorText = ''
-        const { userName, password } = this.ruleForm
-        let res = await login(userName, password)
-        console.log(JSON.stringify(res))
-        this.loading = false
-        if (res.code === 200 && res.data) {
-          this.$router.push({name: 'home_index'})
-        } else {
-          this.errorText = res.msg
-        }
-      } catch (err) {
-        console.log(err)
+    onLogin () {
+      this.loading = true
+      this.errorText = ''
+      const { username, password } = this.ruleForm
+      if (username !== 'admin' || password !== '888888') {
+        setTimeout(() => {
+          this.loading = false
+          this.errorText = '账户或密码错误（admin/888888)'
+        }, 400)
+        return false
       }
+      this.$store.dispatch('LoginIn', this.ruleForm).then(() => {
+        this.loading = false
+        this.$router.push({name: 'home_index'})
+      }).catch(() => {
+        this.loading = false
+      })
     }
   }
 }

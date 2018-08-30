@@ -1,42 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Main from '@/views/Main'
+import routes from './routers'
+import { getToken } from '@/utils/auth'
 
 Vue.use(Router)
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'root',
-      redirect: '/home/index',
-      meta: {}
-    },
-    {
-      path: '/login',
-      name: 'login',
-      title: '登录',
-      meta: {},
-      component: () => import('@/views/login/login.vue')
-    },
-    {
-      path: '/home',
-      component: Main,
-      redirect: '/home/index',
-      children: [
-        {
-          path: 'index',
-          name: 'home_index',
-          component: () => import('@/views/home/Home.vue'),
-          meta: { title: 'home', icon: 'home' }
-        },
-        {
-          path: 'about',
-          name: 'about',
-          component: () => import('@/views//home/About.vue'),
-          meta: { title: 'about', icon: 'about' }
-        }
-      ]
-    }
-  ]
+const LOGIN_VIEW_NAME = 'login'
+const router = new Router({
+  routes
 })
+
+router.beforeEach((to, from, next) => {
+  const token = getToken()
+  if (!token && to.name !== LOGIN_VIEW_NAME) {
+    next({
+      name: LOGIN_VIEW_NAME
+    })
+  } else {
+    next()
+  }
+})
+
+router.afterEach((to, from) => {
+})
+
+export default router

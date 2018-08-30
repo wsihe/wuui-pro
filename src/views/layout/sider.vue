@@ -1,12 +1,12 @@
 <template lang="pug">
-  div(:class="[$style.sider, {[$style.collapse]: isCollapse}]")
-    div(:class="$style.logo", @click="openMenu")
+  div(:class="[$style.sider, {[$style.collapse]: !isCollapse}]")
+    div(:class="$style.logo")
       a
         img(src="~@/assets/logo.png")
         h1 Wuui Pro
     el-menu(
       default-active='1',
-      :collapse='isCollapse',
+      :collapse='!isCollapse',
       background-color="#001529",
       text-color="#fff",
       active-text-color="#108ee9",
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { getMenuData } from '@/router/menu'
 export default {
   name: 'sider',
@@ -32,7 +33,6 @@ export default {
   },
   data () {
     return {
-      isCollapse: false,
       menus: []
     }
   },
@@ -44,13 +44,13 @@ export default {
   destroyed () {
   },
   computed: {
+    ...mapGetters({
+      isCollapse: 'opened'
+    })
   },
   watch: {
   },
   methods: {
-    openMenu () {
-      this.isCollapse = !this.isCollapse
-    }
   }
 }
 </script>

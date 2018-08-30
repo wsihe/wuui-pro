@@ -17,12 +17,8 @@ const USER_MAP = {
 export default {
   login (request) {
     request = JSON.parse(request.body)
-    if (request.username !== 'admin' || request.password !== '888888') {
-      return {
-        code: 200,
-        data: null,
-        msg: '账户或密码错误（admin/888888)'
-      }
+    if (!USER_MAP[request.username]) {
+      return
     }
     return {
       code: 200,

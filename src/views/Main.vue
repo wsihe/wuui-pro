@@ -6,7 +6,7 @@
       layout(type="header")
         wu-header
       layout(type="content")
-        router-view
+        router-view(:key="$route.fullPath")
       layout(type="footer")
         wu-footer
 </template>
