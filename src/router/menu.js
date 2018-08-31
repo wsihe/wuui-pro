@@ -18,11 +18,6 @@ const menuData = [
       {
         name: '分步表单',
         path: 'step-form'
-      },
-      {
-        name: '高级表单',
-        authority: 'admin',
-        path: 'advanced-form'
       }
     ]
   },
@@ -32,34 +27,12 @@ const menuData = [
     path: 'list',
     children: [
       {
-        name: '查询表格',
-        path: 'table-list'
-      },
-      {
         name: '标准列表',
         path: 'basic-list'
       },
       {
         name: '卡片列表',
         path: 'card-list'
-      },
-      {
-        name: '搜索列表',
-        path: 'search',
-        children: [
-          {
-            name: '搜索列表（文章）',
-            path: 'articles'
-          },
-          {
-            name: '搜索列表（项目）',
-            path: 'projects'
-          },
-          {
-            name: '搜索列表（应用）',
-            path: 'applications'
-          }
-        ]
       }
     ]
   },
@@ -115,26 +88,6 @@ const menuData = [
         name: '触发异常',
         path: 'trigger',
         hideInMenu: true
-      }
-    ]
-  },
-  {
-    name: '账户',
-    icon: 'phone',
-    path: 'user',
-    authority: 'guest',
-    children: [
-      {
-        name: '登录',
-        path: 'login'
-      },
-      {
-        name: '注册',
-        path: 'register'
-      },
-      {
-        name: '注册结果',
-        path: 'register-result'
       }
     ]
   }
