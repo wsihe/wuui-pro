@@ -1,5 +1,9 @@
 <template lang="pug">
   div(:class="$style.card")
+    <!--div(:class="$style.head")-->
+      <!--div(:class="$style.wrapper")-->
+        <!--div(:class="$style.title") 标题-->
+        <!--div(:class="$style.extra") 更多-->
     div(:class="$style.body")
       slot
 </template>
@@ -53,19 +57,19 @@ export default {
     border-radius 2px 2px 0 0
     min-height 48px
 
-    .wrapper
-      display flex
+  .wrapper
+    display flex
 
-    .title
-      font-size 16px
-      padding 16px 0
-      text-overflow ellipsis
-      overflow hidden
-      white-space nowrap
-      color alpha(#000, 85%)
-      font-weight 500
-      display inline-block
-      flex 1
+  .title
+    font-size 16px
+    padding 16px 0
+    text-overflow ellipsis
+    overflow hidden
+    white-space nowrap
+    color alpha(#000, 85%)
+    font-weight 500
+    display inline-block
+    flex 1
 
   .extra
     float right
