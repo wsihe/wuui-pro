@@ -5,10 +5,11 @@
         img(src="~@/assets/logo.png")
         h1 Wuui Pro
     el-menu(
-      default-active='1',
+      @select="changeMenu",
+      :default-active='$route.name',
       :collapse='!isCollapse',
       background-color="#001529",
-      text-color="#fff",
+      text-color="hsla(0,0%,100%,.65)",
       active-text-color="#108ee9",
       unique-opened)
       template(v-for="item in menus")
@@ -20,7 +21,6 @@
             i(:class="`el-icon-${item.icon}`")
             span(slot='title') {{item.name}}
           el-menu-item(:index="childMenu.path", v-for="(childMenu, index) in item.children",:key="childMenu.path") {{childMenu.name}}
-
 </template>
 
 <script>
@@ -51,6 +51,9 @@ export default {
   watch: {
   },
   methods: {
+    changeMenu (active) {
+      this.$router.push({name: active})
+    }
   }
 }
 </script>

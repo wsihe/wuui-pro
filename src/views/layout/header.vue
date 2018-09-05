@@ -2,6 +2,9 @@
   div(:class="$style.header")
     i.el-icon-menu(:class="[$style.action, $style.trigger]", @click="toggleSider")
     div(:class="$style.right")
+      span(:class="[$style.action, $style.search]", @click="toggleSearch" v-clickoutside="closeSearch")
+        i.el-icon-search()
+        el-input(ref="input", :class="[$style.input, {[$style.show]: showInput}]", v-model="search" placeholder="请输入搜索内容")
       span(:class="[$style.action, $style.noticeButton]")
         el-badge(:class="$style.badge", :value="100", :max="10")
           i.el-icon-bell
@@ -26,6 +29,8 @@ export default {
   },
   data () {
     return {
+      search: '',
+      showInput: false
     }
   },
   created () {
@@ -54,6 +59,17 @@ export default {
     },
     toggleSider () {
       this.$store.commit('TOGGLE_SIDER')
+    },
+    closeSearch () {
+      this.showInput = false
+    },
+    toggleSearch (event) {
+      const target = event.target
+      this.$refs.input.focus()
+      if (this.showInput && target.tagName === 'INPUT') {
+        return
+      }
+      this.showInput = !this.showInput
     }
   }
 }
@@ -110,20 +126,33 @@ export default {
         font-size 16px
         vertical-align middle
         color $text-color
-      &:hover,
-      &:global(.ant-popover-open)
+      &:hover
         background $primary-1
     .search
-      padding 0
-      margin 0 12px
+      padding 0 12px
       &:hover
         background transparent
+    .input
+      background transparent
+      border-radius 0
+      transition width .3s,margin-left .3s
+      width 0
+      &:global(.el-input--medium .el-input__inner)
+        border none
+        border-radius 0
+      &.show
+        margin-left 8px
+        width 210px
+        &:global(.el-input--medium .el-input__inner)
+          border-bottom 1px solid #d9d9d9
     .badge
       font-size 18px
     .noticeButton
+      position relative
       cursor pointer
       display inline-block
       transition all 0.3s
+      z-index 99
     .account
       .avatar
         display inline-block
@@ -142,8 +171,6 @@ export default {
 
   @media only screen and (max-width: $screen-md)
     .header
-      :global(.ant-divider-vertical)
-        vertical-align unset
       .name
         display none
       i.trigger

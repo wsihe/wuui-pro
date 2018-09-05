@@ -1,10 +1,10 @@
 <template lang="pug">
-  div(:class="$style.view")
+  div(:class="$style.view") 分步表单
 </template>
 
 <script>
 export default {
-  name: 'tpl',
+  name: 'StepForm',
   components: {},
   props: {
   },

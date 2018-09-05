@@ -1,10 +1,10 @@
 <template lang="pug">
-  div(:class="$style.view")
+  div(:class="$style.view") 卡片列表
 </template>
 
 <script>
 export default {
-  name: 'tpl',
+  name: 'CardForm',
   components: {},
   props: {
   },

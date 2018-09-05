@@ -4,20 +4,20 @@ const menuData = [
   {
     name: '首页',
     icon: 'menu',
-    path: 'home/index'
+    path: 'home_index'
   },
   {
     name: '表单页',
     icon: 'tickets',
-    path: 'form',
+    path: 'home',
     children: [
       {
         name: '基础表单',
-        path: 'basic-form'
+        path: 'basicForm'
       },
       {
         name: '分步表单',
-        path: 'step-form'
+        path: 'stepForm'
       }
     ]
   },
@@ -28,11 +28,11 @@ const menuData = [
     children: [
       {
         name: '标准列表',
-        path: 'basic-list'
+        path: 'basicList'
       },
       {
         name: '卡片列表',
-        path: 'card-list'
+        path: 'cardList'
       }
     ]
   },
@@ -97,7 +97,8 @@ function formatter (data, parentPath = '/', parentAuthority) {
   return data.map(item => {
     let { path } = item
     if (!isUrl(path)) {
-      path = parentPath + item.path
+      // path = parentPath + item.path
+      path = item.path
     }
     const result = {
       ...item,
