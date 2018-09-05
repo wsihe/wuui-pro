@@ -4,7 +4,7 @@
     div(:class="$style.right")
       span(:class="[$style.action, $style.search]", @click="toggleSearch" v-clickoutside="closeSearch")
         i.el-icon-search()
-        el-input(ref="input", :class="[$style.input, {[$style.show]: showInput}]", v-model="search" placeholder="请输入搜索内容")
+        el-input(ref="input", :class="[$style.input, {[$style.show]: showInput}]", v-model="search" placeholder="基金名称/编号")
       span(:class="[$style.action, $style.noticeButton]")
         el-badge(:class="$style.badge", :value="100", :max="10")
           i.el-icon-bell

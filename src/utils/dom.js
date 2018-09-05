@@ -1,4 +1,7 @@
-import { trim, isServer } from './index'
+import Vue from 'vue'
+import { trim } from './index'
+
+const isServer = Vue.prototype.$isServer
 
 /**
  * 元素注册事件，兼容 IE
@@ -108,7 +111,6 @@ export function removeClass (el, cls) {
   }
 }
 
-
 /**
  * 获取元素样式
  * @param elem
@@ -131,4 +133,18 @@ export function getStyleValue (elem, style) {
     return parseFloat(value)
   }
   return value
+}
+
+/**
+ * 获取窗口宽度
+ * @return {number}
+ */
+export function getClientWidth () {
+  let winWidth = 0
+  if (window.innerWidth) {
+    winWidth = window.innerWidth
+  } else if ((document.body) && (document.body.clientWidth)) {
+    winWidth = document.body.clientWidth
+  }
+  return winWidth
 }

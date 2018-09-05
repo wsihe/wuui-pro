@@ -6,10 +6,15 @@ const common = {
   mutations: {
     TOGGLE_SIDER (state) {
       state.opened = !state.opened
+    },
+    CLOSE_SIDER (state) {
+      state.opened = false
+    },
+    OPEN_SIDER (state) {
+      state.opened = true
     }
   },
   actions: {
-
   }
 }
 

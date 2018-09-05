@@ -26,6 +26,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getMenuData } from '@/router/menu'
+import { getClientWidth } from '@/utils/dom'
 export default {
   name: 'sider',
   components: {},
@@ -40,8 +41,11 @@ export default {
     this.menus = getMenuData()
   },
   mounted () {
+    this.resizeSider()
+    window.addEventListener('resize', this.resizeSider)
   },
   destroyed () {
+    window.removeEventListener('resize', this.resizeSider)
   },
   computed: {
     ...mapGetters({
@@ -53,6 +57,16 @@ export default {
   methods: {
     changeMenu (active) {
       this.$router.push({name: active})
+    },
+    resizeSider () {
+      requestAnimationFrame(() => {
+        const winWidth = getClientWidth()
+        if (winWidth < 993) {
+          this.$store.commit('CLOSE_SIDER')
+        } else {
+          this.$store.commit('OPEN_SIDER')
+        }
+      })
     }
   }
 }
