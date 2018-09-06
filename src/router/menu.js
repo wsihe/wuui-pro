@@ -7,87 +7,77 @@ const menuData = [
     path: 'home_index'
   },
   {
-    name: '表单页',
+    name: '商品管理',
     icon: 'tickets',
     path: 'home',
     children: [
       {
-        name: '基础表单',
+        name: '添加商品',
         path: 'basicForm'
       },
       {
-        name: '分步表单',
+        name: '商品列表',
         path: 'stepForm'
       }
     ]
   },
   {
-    name: '列表页',
+    name: '订单中心',
     icon: 'document',
     path: 'list',
     children: [
       {
-        name: '标准列表',
+        name: '订单概况',
         path: 'basicList'
       },
       {
-        name: '卡片列表',
-        path: 'cardList'
+        name: '订单列表',
+        path: 'cardist'
       }
     ]
   },
   {
-    name: '详情页',
+    name: '数据管理',
     icon: 'news',
     path: 'profile',
     children: [
       {
-        name: '基础详情页',
+        name: '数据概况',
         path: 'basic'
       },
       {
-        name: '高级详情页',
-        path: 'advanced',
-        authority: 'admin'
+        name: '商品分析',
+        path: 'advanced'
+      },
+      {
+        name: '客户分析',
+        path: 'advanced'
       }
     ]
   },
   {
-    name: '结果页',
+    name: '客户信息',
+    icon: 'search',
+    path: 'exception',
+    children: [
+      {
+        name: '客户列表',
+        path: 'customers'
+      }
+    ]
+  },
+  {
+    name: '个人中心',
     icon: 'setting',
     path: 'result',
     children: [
       {
-        name: '成功',
+        name: '基本信息',
         path: 'success'
       },
       {
-        name: '失败',
+        name: '设置',
         path: 'fail'
-      }
-    ]
-  },
-  {
-    name: '异常页',
-    icon: 'warning',
-    path: 'exception',
-    children: [
-      {
-        name: '403',
-        path: '403'
-      },
-      {
-        name: '404',
-        path: '404'
-      },
-      {
-        name: '500',
-        path: '500'
-      },
-      {
-        name: '触发异常',
-        path: 'trigger',
-        hideInMenu: true
       }
     ]
   }

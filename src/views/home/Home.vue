@@ -3,25 +3,25 @@
     el-row(:gutter="24")
       el-col(:xs="24", :sm="12", :md="12", :lg="6", :xl="6")
         wu-card
-          span 高收益基金
+          span 新增用户
           //i.el-icon-info
           //span 更多
       el-col(:xs="24", :sm="12", :md="12", :lg="6", :xl="6")
         wu-card
-          span 优选稳健型基金
+          span 新增订单
       el-col(:xs="24", :sm="12", :md="12", :lg="6", :xl="6")
         wu-card
           span 热门主题
       el-col(:xs="24", :sm="12", :md="12", :lg="6", :xl="6")
         wu-card
-          span 高端理财
+          span 注册用户
     el-row
       el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6")
         wu-card
-          span 估值
+          span 销售
       el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6")
         wu-card
-          span 领涨
+          span 访问
 </template>
 
 <script>
