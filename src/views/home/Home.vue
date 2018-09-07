@@ -15,10 +15,16 @@
       el-col(:xs="24", :sm="12", :md="12", :lg="6", :xl="6")
         wu-card(:loading="loading")
           span 可提现余额
-    wu-card(:loading="loading", :class="$style.salesArea")
-      el-row
-        el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 销售量
-        el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 访问量
+    wu-card(:loading="loading", :class="$style.salesArea", :padding="0")
+      el-tabs(v-model="activeName")
+        el-tab-pane(label="销售量" name="first")
+          el-row
+            el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 销售量
+            el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 排名
+        el-tab-pane(label="访问量" name="second")
+          el-row
+            el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 访问量
+            el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 排名
     wu-card(title="常用功能", :class="$style.commonArea")
       wu-card-grid(:class="$style.grid") 发布商品
       wu-card-grid(:class="$style.grid") 订单处理
@@ -38,7 +44,8 @@ export default {
   },
   data () {
     return {
-      loading: true
+      loading: true,
+      activeName: 'first'
     }
   },
   created () {
@@ -68,8 +75,15 @@ export default {
     :global
       .el-col
         margin-bottom 24px
+      .el-tabs__nav
+        margin-left 24px
+      .el-tabs__item
+        font-weight normal
+      .el-tab-pane
+        padding 0 24px 24px
 
     .salesArea
+      min-height 80px
       margin-bottom 24px
 
     .commonArea

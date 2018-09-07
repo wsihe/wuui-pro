@@ -6,7 +6,7 @@
           div(:class="$style.title") {{title}}
         slot(name="extra")
           div(:class="$style.extra") {{extra}}
-    div(:class="$style.body")
+    div(:class="$style.body", :style="bodyStyles")
       div(:class="$style.loadingContent", v-if="loading")
         el-row(:gutter="8", v-for="(item, index) in loadingGird", :key="index")
           el-col(:span="children", v-for="(children, key) in item", :key="key")
@@ -16,6 +16,7 @@
 
 <script>
 // loading 列表
+const DEFAULT_PADDING = 16
 const LOADING_GIRD = [
   [22],
   [8, 15],
@@ -33,6 +34,10 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    padding: {
+      type: Number,
+      default: DEFAULT_PADDING
     }
   },
   data () {
@@ -47,6 +52,11 @@ export default {
   destroyed () {
   },
   computed: {
+    bodyStyles () {
+      return this.padding !== DEFAULT_PADDING ? {
+        padding: `${this.padding}px`
+      } : ''
+    }
   },
   watch: {
   },
