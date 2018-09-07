@@ -19,11 +19,15 @@
       el-row
         el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 销售量
         el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 访问量
-    wu-card(title="常用功能")
-      el-row
-        el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 作业
-        el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 昨天
-
+    wu-card(title="常用功能", :class="$style.commonArea")
+      wu-card-grid(:class="$style.grid") 发布商品
+      wu-card-grid(:class="$style.grid") 订单处理
+      wu-card-grid(:class="$style.grid") 数据分析
+      wu-card-grid(:class="$style.grid") 发布商品
+      wu-card-grid(:class="$style.grid") 发布商品
+      wu-card-grid(:class="$style.grid") 发布商品
+      wu-card-grid(:class="$style.grid") 发布商品
+      wu-card-grid(:class="$style.grid") ...
 </template>
 
 <script>
@@ -56,6 +60,8 @@ export default {
 </script>
 
 <style lang="stylus" module>
+  @import "~@/styles/clearfix.styl"
+
   .home
     display block
 
@@ -65,4 +71,13 @@ export default {
 
     .salesArea
       margin-bottom 24px
+
+    .commonArea
+      padding-bottom 24px
+      clearfix()
+
+    .grid
+      width 25%
+      text-align center
+      cursor pointer
 </style>

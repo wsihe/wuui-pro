@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="$style.card")
+  div(:class="[$style.card, {[$style.loading]: loading}]")
     div(:class="$style.head" v-if="!!title || !!extra || $slots.title || $slots.extra")
       div(:class="$style.wrapper")
         slot(name="title")
@@ -9,14 +9,23 @@
     div(:class="$style.body")
       div(:class="$style.loadingContent", v-if="loading")
         el-row(:gutter="8", v-for="(item, index) in loadingGird", :key="index")
-          el-col(:span="children", v-for="children in item")
+          el-col(:span="children", v-for="(children, key) in item", :key="key")
             div(:class="$style.loadingBlock")
       slot(v-if="!loading")
 </template>
 
 <script>
+// loading 列表
+const LOADING_GIRD = [
+  [22],
+  [8, 15],
+  [6, 18],
+  [13, 9],
+  [4, 3, 16],
+  [8, 6, 8]
+]
 export default {
-  name: 'wuCard',
+  name: 'WuCard',
   components: {},
   props: {
     title: String,
@@ -28,14 +37,7 @@ export default {
   },
   data () {
     return {
-      loadingGird: [
-        [22],
-        [8, 15],
-        [6, 18],
-        [13, 9],
-        [4, 3, 16],
-        [8, 6, 8]
-      ]
+      loadingGird: LOADING_GIRD
     }
   },
   created () {
@@ -116,6 +118,10 @@ export default {
 
   .loading .body
     user-select none
+
+  .containGrid:not(.loading) .body
+    margin -1px 0 0 -1px
+    padding 0
 
   .loadingContent
     p
