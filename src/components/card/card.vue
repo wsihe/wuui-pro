@@ -1,11 +1,17 @@
 <template lang="pug">
   div(:class="$style.card")
-    <!--div(:class="$style.head")-->
-      <!--div(:class="$style.wrapper")-->
-        <!--div(:class="$style.title") 标题-->
-        <!--div(:class="$style.extra") 更多-->
+    div(:class="$style.head" v-if="!!title || !!extra || $slots.title || $slots.extra")
+      div(:class="$style.wrapper")
+        slot(name="title")
+          div(:class="$style.title") {{title}}
+        slot(name="extra")
+          div(:class="$style.extra") {{extra}}
     div(:class="$style.body")
-      slot
+      div(:class="$style.loadingContent", v-if="loading")
+        el-row(:gutter="8", v-for="(item, index) in loadingGird", :key="index")
+          el-col(:span="children", v-for="children in item")
+            div(:class="$style.loadingBlock")
+      slot(v-if="!loading")
 </template>
 
 <script>
@@ -13,9 +19,23 @@ export default {
   name: 'wuCard',
   components: {},
   props: {
+    title: String,
+    extra: String,
+    loading: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
+      loadingGird: [
+        [22],
+        [8, 15],
+        [6, 18],
+        [13, 9],
+        [4, 3, 16],
+        [8, 6, 8]
+      ]
     }
   },
   created () {
@@ -36,10 +56,24 @@ export default {
 <style lang="stylus" module>
 
   .card
+    font-family "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size 14px
+    font-variant tabular-nums
+    line-height 1.5
+    color rgba(0, 0, 0, 0.65)
+    -webkit-box-sizing border-box
+    box-sizing border-box
+    margin 0
+    padding 0
+    list-style none
     background #fff
     border-radius 2px
     position relative
     transition all .3s
+
+    :global
+      .el-col
+        margin-bottom 0 !important
 
   .hoverable
     cursor pointer
@@ -83,11 +117,11 @@ export default {
   .loading .body
     user-select none
 
-  .loading-content
+  .loadingContent
     p
       margin 0
 
-  .loading-block
+  .loadingBlock
     height 14px
     margin 4px 0
     border-radius 2px

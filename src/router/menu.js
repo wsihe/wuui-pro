@@ -47,11 +47,11 @@ const menuData = [
       },
       {
         name: '商品分析',
-        path: 'advanced'
+        path: 'advanced1'
       },
       {
         name: '客户分析',
-        path: 'advanced'
+        path: 'advanced2'
       }
     ]
   },
