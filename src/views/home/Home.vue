@@ -20,11 +20,11 @@
         el-tab-pane(label="销售量" name="first")
           el-row
             el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 销售量
-            el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 排名
-        el-tab-pane(label="访问量" name="second")
+            el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 销售排名
+        el-tab-pane(label="流量趋势" name="second")
           el-row
             el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 访问量
-            el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 排名
+            el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 7日访问排名
     wu-card(title="常用功能", :class="$style.commonArea")
       wu-card-grid(:class="$style.grid") 发布商品
       wu-card-grid(:class="$style.grid") 订单处理

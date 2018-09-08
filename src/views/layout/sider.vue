@@ -85,28 +85,29 @@ export default {
     position relative
     transition all .3s cubic-bezier(0.645, 0.045, 0.355, 1)
     z-index 10
-    &.ligth
-      background-color white
-      .logo
-        background white
-        h1
-          color #002140
+
     :global
       .el-menu
         border none
         &:not(.el-menu--collapse)
           width 256px
+      .el-submenu .el-menu-item
+        padding-left 50px !important
+
   .collapse
-    flex 0 0 80px
-    max-width 80px
-    min-width 80px
-    width 80px
+    flex 0 0 64px
+    max-width 64px
+    min-width 64px
+    width 64px
+
+    .logo
+      padding-left $menu-collapsed-width - 50px
 
   .logo
     height 64px
     position relative
     line-height 64px
-    padding-left $menu-collapsed-width - 40px
+    padding-left $menu-collapsed-width - 42px
     transition all 0.3s
     background #002140
     overflow hidden
