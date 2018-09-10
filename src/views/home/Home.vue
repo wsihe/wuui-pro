@@ -17,11 +17,9 @@
           span 可提现余额
     wu-card(:loading="loading", :class="$style.salesArea", :padding="0")
       el-tabs(v-model="activeName")
-        el-tab-pane(label="销售量" name="first")
-          el-row
-            el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 销售量
-            el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 销售排名
-        el-tab-pane(label="流量趋势" name="second")
+        el-tab-pane(label="流量趋势" name="first")
+          wu-chart(:init-options="initOptions", :options="options")
+        el-tab-pane(label="销售量" name="second")
           el-row
             el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 访问量
             el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 7日访问排名
@@ -37,6 +35,7 @@
 </template>
 
 <script>
+import { buildLineChart } from '@/utils/chartHelper'
 export default {
   name: 'home',
   components: {},
@@ -45,7 +44,9 @@ export default {
   data () {
     return {
       loading: true,
-      activeName: 'first'
+      activeName: 'first',
+      initOptions: buildLineChart,
+      options: {}
     }
   },
   created () {
@@ -54,6 +55,19 @@ export default {
     setTimeout(() => {
       this.loading = false
     }, 600)
+    this.options = {
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [{
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        type: 'line'
+      }]
+    }
   },
   destroyed () {
   },

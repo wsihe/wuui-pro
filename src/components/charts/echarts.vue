@@ -3,81 +3,83 @@
 </template>
 
 <script>
-  import { isEmpty } from '@/utils'
-  import resize from './mixins/resize'
-  import echarts from 'echarts/lib/echarts'
+import resize from './mixins/resize'
+import echarts from 'echarts/lib/echarts'
+import customTheme from './theme.json'
+echarts.registerTheme('customTheme', customTheme)
 
-  const MOUSE_EVENTS = [
-    'click'
-  ]
+const EVENTS = [
+  'click'
+]
 
-  export default {
-    name: 'GfEcharts',
-    mixins: [resize],
-    props: {
-      options: Object,
-      initOptions: Object
+export default {
+  name: 'wuChart',
+  mixins: [resize],
+  props: {
+    options: Object,
+    theme: {
+      type: [String, Object],
+      default: 'customTheme'
     },
-    data () {
-      return {
-        chart: null
-      }
-    },
-    created () {
-    },
-    mounted () {
-      if (this.opts) {
-        this.$nextTick(() => {
-          this.init()
-        })
-      }
-    },
-    destroyed () {
-    },
-    computed: {
-      opts () {
-        return this.options
-      }
-    },
-    watch: {
-      opts: {
-        handler (options) {
-          if (!this.chart && options) {
-            this.$nextTick(() => {
-              this.init()
-            })
-          } else {
-            this.$nextTick(() => {
-              this.chart.setOption(this.opts)
-            })
-          }
-        },
-        deep: true
-      }
-    },
-    activated () {
-      this.chart && this.chart.resize()
-    },
-    methods: {
-      init () {
-        let chart = echarts.init(this.$el)
-        const empty = isEmpty(this.initOptions, false)
-        if (this.initOptions && !empty) {
-          chart.setOption(this.initOptions)
-        }
-        chart.setOption(this.opts)
-
-        MOUSE_EVENTS.forEach(event => {
-          chart.off(event) // 防止重复注册同一事件
-          chart.on(event, params => {
-            this.$emit('chart' + event, params)
+    initOptions: Object
+  },
+  data () {
+    return {
+      chart: null
+    }
+  },
+  created () {
+  },
+  mounted () {
+    if (this.opts) {
+      this.init()
+    }
+  },
+  destroyed () {
+  },
+  computed: {
+    opts () {
+      return this.options
+    }
+  },
+  watch: {
+    opts: {
+      handler (options) {
+        if (!this.chart && options) {
+          this.$nextTick(() => {
+            this.init()
           })
-        })
-
-        this.chart = chart
+        } else {
+          this.$nextTick(() => {
+            this.chart.setOption(this.opts)
+          })
+        }
+      },
+      deep: true
+    }
+  },
+  activated () {
+    this.chart && this.chart.resize()
+  },
+  methods: {
+    init () {
+      if (this.chart) {
+        return
       }
+      let chart = echarts.init(this.$el, this.theme, this.initOptions)
+      chart.setOption(this.opts || {}, true)
+
+      EVENTS.forEach(event => {
+        chart.off(event)
+        chart.on(event, params => {
+          this.$emit(event, params)
+        })
+      })
+
+      this.chart = chart
     }
   }
+}
 </script>
 
 <style lang="stylus">
