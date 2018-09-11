@@ -45,28 +45,36 @@ export default {
     return {
       loading: true,
       activeName: 'first',
-      initOptions: buildLineChart,
+      initOptions: {},
       options: {}
     }
   },
   created () {
+    this.initOptions = buildLineChart
   },
   mounted () {
     setTimeout(() => {
       this.loading = false
     }, 600)
     this.options = {
+      legend: {
+        data: ['浏览量', '访客数']
+      },
       xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
       },
-      yAxis: {
-        type: 'value'
-      },
-      series: [{
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line'
-      }]
+      series: [
+        {
+          name: '浏览量',
+          type: 'line',
+          data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+          name: '访客数',
+          type: 'line',
+          data: [220, 182, 191, 234, 290, 330, 310]
+        }
+      ]
     }
   },
   destroyed () {

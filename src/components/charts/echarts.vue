@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import { isEmpty } from '@/utils'
 import resize from './mixins/resize'
 import echarts from 'echarts/lib/echarts'
 import customTheme from './theme.json'
@@ -66,8 +67,12 @@ export default {
       if (this.chart) {
         return
       }
-      let chart = echarts.init(this.$el, this.theme, this.initOptions)
-      chart.setOption(this.opts || {}, true)
+      let chart = echarts.init(this.$el, this.theme)
+      const empty = isEmpty(this.initOptions, false)
+      if (this.initOptions && !empty) {
+        chart.setOption(this.initOptions)
+      }
+      chart.setOption(this.opts)
 
       EVENTS.forEach(event => {
         chart.off(event)
@@ -85,5 +90,5 @@ export default {
 <style lang="stylus">
   .wu-echarts
     width 100%
-    height 200px
+    height 300px
 </style>
