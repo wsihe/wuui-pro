@@ -1,11 +1,11 @@
 <template lang="pug">
   div(:class="[$style.card, {[$style.loading]: loading}]")
-    div(:class="$style.head" v-if="!!title || !!extra || $slots.title || $slots.extra")
+    div(:class="$style.head" v-if="title || extra || $slots.title || $slots.extra")
       div(:class="$style.wrapper")
-        slot(name="title")
-          div(:class="$style.title") {{title}}
-        slot(name="extra")
-          div(:class="$style.extra") {{extra}}
+          div(:class="$style.title" v-if="title || $slots.title")
+            slot(name="title") {{title}}
+          div(:class="$style.extra" v-if="extra || $slots.extra")
+            slot(name="extra") {{extra}}
     div(:class="$style.body", :style="bodyStyles")
       div(:class="$style.loadingContent", v-if="loading")
         el-row(:gutter="8", v-for="(item, index) in loadingGird", :key="index")

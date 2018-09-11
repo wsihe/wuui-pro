@@ -1,4 +1,5 @@
 import { debounce } from '@/utils'
+import { mapGetters } from 'vuex'
 
 export default {
   mounted () {
@@ -12,6 +13,14 @@ export default {
   beforeDestroy () {
     window.removeEventListener('resize', this.__resizeHandler)
   },
-  methods: {
+  computed: {
+    ...mapGetters({
+      isCollapse: 'opened'
+    })
+  },
+  watch: {
+    isCollapse () {
+      this.__resizeHandler()
+    }
   }
 }
