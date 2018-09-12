@@ -46,13 +46,27 @@
               span(:class="$style.label") 昨日订单
               span {{daySales | numFormat}}
     wu-card(title="常用功能", :class="$style.commonArea")
-      wu-card-grid(:class="$style.grid") 发布商品
-      wu-card-grid(:class="$style.grid") 订单处理
-      wu-card-grid(:class="$style.grid") 数据分析
-      wu-card-grid(:class="$style.grid") 发布商品
-      wu-card-grid(:class="$style.grid") 发布商品
-      wu-card-grid(:class="$style.grid") 发布商品
-      wu-card-grid(:class="$style.grid") 发布商品
+      wu-card-grid(:class="$style.grid")
+        wu-icon(name="product", :scale="2")
+        span 发布商品
+      wu-card-grid(:class="$style.grid")
+        wu-icon(name="product", :scale="2")
+        span 订单处理
+      wu-card-grid(:class="$style.grid")
+        wu-icon(name="product", :scale="2")
+        span 数据分析
+      wu-card-grid(:class="$style.grid")
+        wu-icon(name="product", :scale="2")
+        span 发布商品
+      wu-card-grid(:class="$style.grid")
+        wu-icon(name="product", :scale="2")
+        span 发布商品
+      wu-card-grid(:class="$style.grid")
+        wu-icon(name="product", :scale="2")
+        span 发布商品
+      wu-card-grid(:class="$style.grid")
+        wu-icon(name="product", :scale="2")
+        span 发布商品
       wu-card-grid(:class="$style.grid") ...
     wu-card(:loading="loading", :class="$style.salesArea", :padding="0")
       el-tabs(v-model="activeName")

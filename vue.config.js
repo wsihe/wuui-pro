@@ -20,6 +20,23 @@ module.exports = {
       .set('@', resolve('src'))
       .set('components', resolve('src/components'))
       .set('config', resolve('config'))
+
+    config.module
+      .rule('svg')
+      .exclude.add(resolve('src/assets/icons'))
+      .end()
+
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('src/assets/icons'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
+      .end()
   },
   // 打包时不生成.map文件
   productionSourceMap: false

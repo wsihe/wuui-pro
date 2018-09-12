@@ -33,6 +33,7 @@
     "sass-loader": "^7.0.3",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "svg-sprite-loader": "^3.9.2",
     "vue-cli-plugin-element": "^1.0.0",
     "vue-cli-plugin-pug": "^1.0.5",
     "vue-template-compiler": "^2.5.16"

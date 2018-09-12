@@ -2,12 +2,14 @@ import Card from './card'
 import CardGrid from './card-grid'
 import Chart from './charts'
 import ChartCard from './chart-card'
+import Icon from './icon'
 
 const components = [
   Card,
   CardGrid,
   Chart,
-  ChartCard
+  ChartCard,
+  Icon
 ]
 
 const install = function (Vue, opts = {}) {
@@ -28,5 +30,6 @@ export default {
   CardGrid,
   Chart,
   ChartCard,
+  Icon,
   install
 }
