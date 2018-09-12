@@ -255,10 +255,10 @@
 		}
 	},
 	"tooltip": {
-		"backgroundColor": "#303030",
-		"padding": [5, 10],
+		"backgroundColor": "#fff",
+		"padding": [10, 15],
 		"textStyle": {
-			"color": "#fff",
+			"color": "#333",
 			"fontSize": 12,
 			"fontFamily": "Microsoft YaHei",
 			"align": "left"
@@ -266,7 +266,7 @@
 		"axisPointer": {
 			"type": "none"
 		},
-		"extraCssText": "border-radius:2px; opacity: 0.8;"
+		"extraCssText": "border-radius:2px; opacity: 0.8; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);"
 	},
 	"timeline": {
 		"lineStyle": {

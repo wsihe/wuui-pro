@@ -5,14 +5,7 @@ export const buildLineChart = (() => {
       right: 0
     },
     tooltip: {
-      trigger: 'axis',
-      formatter: function (params) {
-        var res = params[0].name
-        for (var i = 0, l = params.length; i < l; i++) {
-          res += '<br/>' + params[i].seriesName + ' : ' + params[i].value
-        }
-        return res
-      }
+      trigger: 'axis'
     },
     grid: {
       top: '12%',
@@ -25,6 +18,45 @@ export const buildLineChart = (() => {
     },
     yAxis: [{
       type: 'value'
+    }],
+    series: []
+  }
+})()
+
+export const buildCardChart = (() => {
+  return {
+    legend: {
+      show: false
+    },
+    tooltip: {
+      trigger: 'axis',
+      confine: true,
+      formatter: function (params) {
+        let res = params.reduce((pre, item) => {
+          let dot = `<span style="display:inline-block;border-radius:50%;margin:2px;background:${item.color};width:5px;height:5px"></span>`
+          return pre + `${dot} ${item.name} <span style="margin-left:15px"> ${item.value}</span>`
+        }, '')
+        return res
+      }
+    },
+    grid: {
+      top: '12%',
+      left: '-20px',
+      right: '-20px',
+      bottom: '0'
+    },
+    xAxis: {
+      type: 'category',
+      show: false
+    },
+    yAxis: [{
+      type: 'value',
+      axisLabel: {
+        show: false
+      },
+      splitLine: {
+        show: false
+      }
     }],
     series: []
   }

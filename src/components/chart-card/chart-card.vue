@@ -9,8 +9,9 @@
             slot(name="action") {{action}}
         div(:class="$style.total")
           slot(name="total") {{total}}
-    div(:class="$style.content")
-      slot(name="content")
+    div(:class="$style.content", :style="contentStyles")
+      div(:class="$style.contentFixed")
+        slot(name="content")
     div(:class="$style.footer")
       slot(name="footer")
 </template>
@@ -22,7 +23,8 @@ export default {
   props: {
     title: String,
     action: String,
-    total: String
+    total: String,
+    contentHeight: Number
   },
   data () {
     return {
@@ -35,6 +37,11 @@ export default {
   destroyed () {
   },
   computed: {
+    contentStyles () {
+      return this.contentHeight ? {
+        height: `${this.contentHeight}px`
+      } : ''
+    }
   },
   watch: {
   },
@@ -62,10 +69,11 @@ export default {
     height 22px
 
   .action
-    cursor pointer
     position absolute
     top 0
     right 0
+    cursor pointer
+    color #cccccc
 
   .total
     overflow hidden
@@ -82,6 +90,12 @@ export default {
   .content
     margin-bottom 12px
     position relative
+    width 100%
+
+  .contentFixed
+    bottom 0
+    left 0
+    position absolute
     width 100%
 
   .footer
