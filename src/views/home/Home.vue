@@ -128,7 +128,7 @@ export default {
           data: [120, 132, 101, 134, 90, 230, 210]
         }
       ]
-    },
+    }
     this.options = {
       legend: {
         data: ['浏览量', '访客数']
