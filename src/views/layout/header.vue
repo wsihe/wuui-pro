@@ -1,6 +1,7 @@
 <template lang="pug">
   div(:class="$style.header")
-    i.el-icon-menu(:class="[$style.action, $style.trigger]", @click="toggleSider")
+    span(:class="[$style.action, $style.trigger]", @click="toggleSider")
+      wu-icon(:name="menuIcon", :scale="2.2")
     div(:class="$style.right")
       span(:class="[$style.action, $style.search]", @click="toggleSearch" v-clickoutside="closeSearch")
         i.el-icon-search()
@@ -22,6 +23,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'wuHeader',
   components: {},
@@ -40,6 +42,12 @@ export default {
   destroyed () {
   },
   computed: {
+    ...mapGetters([
+      'opened'
+    ]),
+    menuIcon () {
+      return this.opened ? 'menu-fold' : 'menu-unfold'
+    }
   },
   watch: {
   },
@@ -105,13 +113,18 @@ export default {
       vertical-align middle
 
   .trigger
-    font-size 20px
-    line-height 64px !important
     cursor pointer
-    transition all 0.3s, padding 0s
-    padding 0 24px
+    font-size 18px
+    height 64px
+    line-height 64px
+    padding 22px 24px
+    transition all .3s,padding 0s
     &:hover
       background $primary-1
+    :global
+      .wu-icon
+        position relative
+        top 3px
 
   .right
     float right

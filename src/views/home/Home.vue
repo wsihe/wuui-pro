@@ -6,7 +6,7 @@
           wu-chart-card(title="总销售额", :content-height="46")
             template(slot="total") {{totalSales | yuan}}
             el-tooltip(slot="action", content="总销售额" placement="top")
-              i.el-icon-info
+              wu-icon(name="info", :scale="1.5")
             div(slot="content")
                span 周同比 12%
                span 日同比 11%
@@ -18,7 +18,7 @@
           wu-chart-card(title="访问量", :content-height="46")
             template(slot="total") {{totalVisits | numFormat}}
             el-tooltip(slot="action", content="访问量" placement="top")
-              i.el-icon-info
+              wu-icon(name="info", :scale="1.5")
             div(:class="$style.chartContent", slot="content")
               wu-chart(:init-options="initCardOptions", :options="cardOptions")
             div(slot="footer")
@@ -29,7 +29,7 @@
           wu-chart-card(title="成交量", :content-height="46")
             template(slot="total") {{totalSales | numFormat}}
             el-tooltip(slot="action", content="日成交量" placement="top")
-              i.el-icon-info
+              wu-icon(name="info", :scale="1.5")
             div(:class="$style.chartContent", slot="content")
               wu-chart(:init-options="initCardOptions", :options="cardBarOptions")
             div(slot="footer")
@@ -40,34 +40,36 @@
           wu-chart-card(title="待发货订单", :content-height="46")
             template(slot="total") {{totalSales | numFormat}}
             el-tooltip(slot="action", content="待发货订单" placement="top")
-              i.el-icon-info
+              wu-icon(name="info", :scale="1.5")
             div(slot="content")
             div(slot="footer")
               span(:class="$style.label") 昨日订单
               span {{daySales | numFormat}}
     wu-card(title="常用功能", :class="$style.commonArea")
       wu-card-grid(:class="$style.grid")
-        wu-icon(name="product", :scale="2")
+        wu-icon(name="add-product", :scale="2")
         span 发布商品
       wu-card-grid(:class="$style.grid")
-        wu-icon(name="product", :scale="2")
+        wu-icon(name="order", :scale="2")
         span 订单处理
       wu-card-grid(:class="$style.grid")
-        wu-icon(name="product", :scale="2")
+        wu-icon(name="data-analysis", :scale="2")
         span 数据分析
       wu-card-grid(:class="$style.grid")
-        wu-icon(name="product", :scale="2")
-        span 发布商品
+        wu-icon(name="coupon", :scale="2")
+        span 优惠
       wu-card-grid(:class="$style.grid")
         wu-icon(name="product", :scale="2")
-        span 发布商品
+        span 商品管理
       wu-card-grid(:class="$style.grid")
-        wu-icon(name="product", :scale="2")
-        span 发布商品
+        wu-icon(name="customers", :scale="2")
+        span 客户信息
       wu-card-grid(:class="$style.grid")
-        wu-icon(name="product", :scale="2")
-        span 发布商品
-      wu-card-grid(:class="$style.grid") ...
+        wu-icon(name="activity", :scale="2")
+        span 活动中心
+      wu-card-grid(:class="$style.grid")
+        wu-icon(name="help", :scale="2")
+        span 帮助
     wu-card(:loading="loading", :class="$style.salesArea", :padding="0")
       el-tabs(v-model="activeName")
         el-tab-pane(label="流量趋势" name="first" lazy)
@@ -229,8 +231,12 @@ export default {
       clearfix()
 
     .grid
+      display flex
+      align-items center
+      justify-content center
       width 25%
-      text-align center
       cursor pointer
+      span
+        margin-left 8px
 
 </style>

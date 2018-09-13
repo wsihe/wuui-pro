@@ -73,7 +73,7 @@ export default {
     top 0
     right 0
     cursor pointer
-    color #cccccc
+    color rgba(0,0,0,.45)
 
   .total
     overflow hidden

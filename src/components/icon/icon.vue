@@ -54,7 +54,7 @@ export default {
     },
     clazz () {
       return {
-        'svg-icon': true,
+        'wu-icon': true,
         spin: this.spin,
         active: this.index === this.currentIndex
       }
@@ -106,11 +106,11 @@ export default {
 </script>
 
 <style lang="stylus">
-  .svg-icon
+  .wu-icon
     display inline-block
     fill currentColor
 
-  .svg-icon.spin
+  .wu-icon.spin
     animation fa-spin 1s 0s infinite linear
 
   @keyframes fa-spin

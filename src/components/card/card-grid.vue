@@ -1,35 +1,16 @@
 <template lang="pug">
-  div(:class="$style.grid")
+  .wu-card-grid
     slot
 </template>
 
 <script>
 export default {
-  name: 'WuCardGrid',
-  components: {},
-  props: {
-  },
-  data () {
-    return {
-    }
-  },
-  created () {
-  },
-  mounted () {
-  },
-  destroyed () {
-  },
-  computed: {
-  },
-  watch: {
-  },
-  methods: {
-  }
+  name: 'WuCardGrid'
 }
 </script>
 
-<style lang="stylus" module>
-  .grid
+<style lang="stylus">
+  .wu-card-grid
     border-radius 0
     border 0
     box-shadow 1px 0 0 0 #e8e8e8, 0 1px 0 0 #e8e8e8, 1px 1px 0 0 #e8e8e8, 1px 0 0 0 #e8e8e8 inset, 0 1px 0 0 #e8e8e8 inset
