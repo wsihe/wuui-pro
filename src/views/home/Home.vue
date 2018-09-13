@@ -73,12 +73,37 @@
     wu-card(:loading="loading", :class="$style.salesArea", :padding="0")
       el-tabs(v-model="activeName")
         el-tab-pane(label="流量趋势" name="first" lazy)
-          wu-chart(:init-options="initOptions", :options="options")
+          el-row
+            el-col(:xs="24", :sm="12", :md="12", :lg="16", :xl="6")
+              wu-chart(:init-options="initOptions", :options="options")
+            el-col(:xs="24", :sm="12", :md="12", :lg="8", :xl="6")
+              div(:class="$style.salesRank")
+                h4 商品访问量排名
+                ul(:class="$style.rankingList")
+                  li
+                    span(:class="[$style.rankingItemNumber, {[$style.active]: true }]") 1
+                    span(:class="$style.rankingItemTitle") 农家蜂蜜
+                    span 1212
+                  li
+                    span(:class="[$style.rankingItemNumber, {[$style.active]: false }]") 1
+                    span(:class="$style.rankingItemTitle") 农家蜂蜜
+                    span 1212
         el-tab-pane(label="销售量" name="second" lazy)
-          wu-chart(:init-options="initOptions", :options="barOptions")
-          <!--el-row-->
-            <!--el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 访问量-->
-            <!--el-col(:xs="24", :sm="12", :md="12", :lg="12", :xl="6") 7日访问排名-->
+          el-row
+            el-col(:xs="24", :sm="12", :md="12", :lg="16", :xl="6")
+              wu-chart(:init-options="initOptions", :options="barOptions")
+            el-col(:xs="24", :sm="12", :md="12", :lg="8", :xl="6")
+              div(:class="$style.salesRank")
+                h4 销量排名
+                ul(:class="$style.rankingList")
+                  li
+                    span(:class="[$style.rankingItemNumber, {[$style.active]: true }]") 1
+                    span(:class="$style.rankingItemTitle") 农家蜂蜜
+                    span 1212
+                  li
+                    span(:class="[$style.rankingItemNumber, {[$style.active]: false }]") 1
+                    span(:class="$style.rankingItemTitle") 农家蜂蜜
+                    span 1212
 </template>
 
 <script>
@@ -193,6 +218,7 @@ export default {
 </script>
 
 <style lang="stylus" module>
+  @import "~@/styles/define.styl"
   @import "~@/styles/clearfix.styl"
 
   .home
@@ -238,5 +264,45 @@ export default {
       cursor pointer
       span
         margin-left 8px
+
+    .salesRank
+      padding 0 32px 32px 72px
+  
+    .rankingList
+      margin 25px 0 0
+      padding 0
+      list-style none
+      li
+        clearfix()
+        margin-top 16px
+        display flex
+        align-items center
+        span 
+          color $text-color
+          font-size 14px
+          line-height 22px
+        
+        .rankingItemNumber 
+          background-color #f5f5f5
+          border-radius 20px
+          display inline-block
+          font-size 12px
+          font-weight 600
+          margin-right 16px
+          height 20px
+          line-height 20px
+          width 20px
+          text-align center
+          margin-top 1.5px
+          &.active
+            background-color #314659
+            color #fff
+            
+        .rankingItemTitle 
+          flex 1
+          white-space nowrap
+          text-overflow ellipsis
+          overflow hidden
+          margin-right 8px
 
 </style>

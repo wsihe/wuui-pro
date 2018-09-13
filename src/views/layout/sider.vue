@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="[$style.sider, {[$style.collapse]: !isCollapse}]")
+  .sidebar-container(:class="[$style.sider, {[$style.collapse]: !isCollapse}]")
     div(:class="$style.logo")
       a
         img(src="~@/assets/logo.png")
@@ -11,6 +11,7 @@
       background-color="#001529",
       text-color="hsla(0,0%,100%,.65)",
       active-text-color="#108ee9",
+      :show-timeout="200",
       unique-opened)
       template(v-for="item in menus")
         el-menu-item(v-if="item.leaf", :index="item.path")

@@ -1,5 +1,4 @@
 import { debounce } from '@/utils'
-import { mapGetters } from 'vuex'
 
 export default {
   mounted () {
@@ -9,18 +8,21 @@ export default {
       }
     }, 100)
     window.addEventListener('resize', this.__resizeHandler)
+
+    const sidebarElm = document.getElementsByClassName('sidebar-container')[0]
+    sidebarElm.addEventListener('transitionend', this.sidebarResizeHandler)
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.__resizeHandler)
+
+    const sidebarElm = document.getElementsByClassName('sidebar-container')[0]
+    sidebarElm.removeEventListener('transitionend', this.sidebarResizeHandler)
   },
-  computed: {
-    ...mapGetters({
-      isCollapse: 'opened'
-    })
-  },
-  watch: {
-    isCollapse () {
-      this.__resizeHandler()
+  methods: {
+    sidebarResizeHandler (e) {
+      if (e.propertyName === 'width') {
+        this.__resizeHandler()
+      }
     }
   }
 }
