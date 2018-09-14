@@ -1,27 +1,27 @@
 <template lang="pug">
   .sidebar-container(:class="[$style.sider, {[$style.collapse]: !isCollapse}]")
-    div(:class="$style.logo")
-      a
-        img(src="~@/assets/logo.png")
-        h1 Wuui Pro
-    el-menu(
-      @select="changeMenu",
-      :default-active='$route.name',
-      :collapse='!isCollapse',
-      background-color="#001529",
-      text-color="hsla(0,0%,100%,.65)",
-      active-text-color="#108ee9",
-      :show-timeout="200",
-      unique-opened)
-      template(v-for="item in menus")
-        el-menu-item(v-if="item.leaf", :index="item.path")
-          i(:class="`el-icon-${item.icon}`")
-          span(slot='title') {{item.name}}
-        el-submenu(v-else, :index="item.icon", :key="item.icon")
-          template(slot='title')
+    div(:class="$style.siderFiexd")
+      div(:class="$style.logo")
+        a
+          img(src="~@/assets/logo.png")
+          h1 Wuui Pro
+      el-menu(
+        @select="changeMenu",
+        :default-active='$route.name',
+        :collapse='!isCollapse',
+        background-color="#001529",
+        text-color="hsla(0,0%,100%,.65)",
+        active-text-color="#108ee9",
+        unique-opened)
+        template(v-for="item in menus")
+          el-menu-item(v-if="item.leaf", :index="item.path")
             i(:class="`el-icon-${item.icon}`")
             span(slot='title') {{item.name}}
-          el-menu-item(:index="childMenu.path", v-for="(childMenu, index) in item.children",:key="childMenu.path") {{childMenu.name}}
+          el-submenu(v-else, :index="item.icon", :key="item.icon")
+            template(slot='title')
+              i(:class="`el-icon-${item.icon}`")
+              span(slot='title') {{item.name}}
+            el-menu-item(:index="childMenu.path", v-for="(childMenu, index) in item.children",:key="childMenu.path") {{childMenu.name}}
 </template>
 
 <script>
@@ -83,9 +83,13 @@ export default {
     width 256px
     min-height 100vh
     box-shadow 2px 0 6px rgba(0, 21, 41, 0.35)
-    position relative
     transition all .3s cubic-bezier(0.645, 0.045, 0.355, 1)
     z-index 10
+
+    .siderFiexd
+      position fixed
+      left 0px
+      overflow auto
 
     :global
       .el-menu
@@ -102,11 +106,13 @@ export default {
     width 64px
 
     .logo
+      width 64px
       padding-left $menu-collapsed-width - 50px
 
   .logo
-    height 64px
     position relative
+    width 256px
+    height 64px
     line-height 64px
     padding-left $menu-collapsed-width - 42px
     transition all 0.3s

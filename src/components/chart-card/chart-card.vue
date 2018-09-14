@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="$style.chartCard")
+  .wu-chart-card(:class="$style.chartCard")
     div(:class="$style.chartTop")
       div(:class="$style.metaWrap")
         div(:class="$style.meta")
@@ -12,7 +12,7 @@
     div(:class="$style.content", :style="contentStyles")
       div(:class="$style.contentFixed")
         slot(name="content")
-    div(:class="$style.footer")
+    div(:class="$style.footer" v-if="$slots.footer")
       slot(name="footer")
 </template>
 
