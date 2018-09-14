@@ -13,11 +13,11 @@ const menuData = [
     children: [
       {
         name: '添加商品',
-        path: 'basicForm'
+        path: 'addProduct'
       },
       {
         name: '商品列表',
-        path: 'stepForm'
+        path: 'products'
       }
     ]
   },
@@ -28,11 +28,11 @@ const menuData = [
     children: [
       {
         name: '订单概况',
-        path: 'basicList'
+        path: 'basicOrder'
       },
       {
         name: '订单列表',
-        path: 'cardist'
+        path: 'orders'
       }
     ]
   },

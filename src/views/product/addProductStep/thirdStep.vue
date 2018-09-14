@@ -1,10 +1,12 @@
 <template lang="pug">
-  div(:class="$style.view") 分步表单
+  div(:class="$style.step")
+    el-button(type="primary", @click="next") 继续添加
+
 </template>
 
 <script>
 export default {
-  name: 'StepForm',
+  name: 'ThirdStep',
   components: {},
   props: {
   },
@@ -23,11 +25,14 @@ export default {
   watch: {
   },
   methods: {
+    next () {
+      this.$store.commit('SET_PRODUCT_ACTIVE', 0)
+    }
   }
 }
 </script>
 
 <style lang="stylus" module>
-  .view
+  .step
     display block
 </style>

@@ -2,7 +2,6 @@
 @import "./clearfix.styl";
 @import "./normalize.styl";
 
-// http://stackoverflow.com/a/13611748/3040605
 @font-face {
   font-family: "Helvetica Neue For Number";
   src: local("Helvetica Neue");
@@ -11,7 +10,7 @@
 
 * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); //  remove tap highlight color for mobile safari
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 *:before,
@@ -19,7 +18,6 @@
   box-sizing: border-box;
 }
 
-// HTML & Body reset
 html, body {
   width: 100%;
   height: 100%;
@@ -31,15 +29,15 @@ body {
   line-height: $line-height-base;
   color: $text-color;
   background-color: $body-background;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-// unify the setting of elements's margin and padding for browsers
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
   margin: 0;
   padding: 0;
 }
 
-// Reset fonts for relevant elements
 button,input,select,textarea {
   font-family: inherit;
   font-size: inherit;
@@ -52,7 +50,6 @@ ol {
   list-style: none;
 }
 
-// Remove the clear button of a text input control in IE10+
 input::-ms-clear, input::-ms-reveal {
   display: none;
 }
@@ -62,13 +59,11 @@ input::-ms-clear, input::-ms-reveal {
   color: #fff;
 }
 
-// Headers
 h1, h2, h3, h4, h5, h6 {
   color: $heading-color;
   font-weight: 500;
 }
 
-// Links
 a {
   color: $link-color;
   background: transparent;
@@ -101,14 +96,6 @@ a {
     cursor: not-allowed;
     pointer-events: none;
   }
-}
-
-.{$ant-prefix}-divider {
-  margin: 0 6px;
-  display: inline-block;
-  height: 8px;
-  width: 1px;
-  background: #ccc;
 }
 
 code,

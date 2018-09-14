@@ -27,28 +27,28 @@ export default [
         meta: { title: 'home' }
       },
       {
-        path: 'basicForm',
-        name: 'basicForm',
-        component: () => import('@/views/form/basicForm.vue'),
-        meta: { title: '基本表单' }
+        path: 'addProduct',
+        name: 'addProduct',
+        component: () => import('@/views/product/addProduct.vue'),
+        meta: { title: '添加商品' }
       },
       {
-        path: 'stepForm',
-        name: 'stepForm',
-        component: () => import('@/views/form/stepForm.vue'),
-        meta: { title: '分步表单' }
+        path: 'products',
+        name: 'products',
+        component: () => import('@/views/product/products.vue'),
+        meta: { title: '商品列表' }
       },
       {
-        path: 'basicList',
-        name: 'basicList',
-        component: () => import('@/views/list/basicList.vue'),
-        meta: { title: '标准列表' }
+        path: 'basicOrder',
+        name: 'basicOrder',
+        component: () => import('@/views/order/basicOrder.vue'),
+        meta: { title: '订单概况' }
       },
       {
-        path: 'cardList',
-        name: 'cardList',
-        component: () => import('@/views/list/cardList.vue'),
-        meta: { title: '卡片列表' }
+        path: 'orders',
+        name: 'orders',
+        component: () => import('@/views/order/orders.vue'),
+        meta: { title: '订单列表' }
       }
     ]
   }

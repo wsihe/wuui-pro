@@ -1,10 +1,11 @@
 <template lang="pug">
-  div(:class="$style.view") 基础表单
+  div(:class="$style.product")
+    wu-card() 表单
 </template>
 
 <script>
 export default {
-  name: 'BasicForm',
+  name: 'product',
   components: {},
   props: {
   },
@@ -28,6 +29,6 @@ export default {
 </script>
 
 <style lang="stylus" module>
-  .view
+  .product
     display block
 </style>
