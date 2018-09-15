@@ -4,6 +4,6 @@ import './element-variables.scss'
 import Wuui from '@/components'
 
 Vue.use(Element, {
-  size: 'medium'
+  size: 'small'
 })
 Vue.use(Wuui)
