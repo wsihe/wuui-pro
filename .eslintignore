@@ -1,0 +1,3 @@
+dist/*.js
+public/*.js
+config/*.js

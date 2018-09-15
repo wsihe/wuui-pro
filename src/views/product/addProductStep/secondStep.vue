@@ -1,6 +1,7 @@
 <template lang="pug">
   div(:class="$style.step")
-    el-button(type="primary", @click="next") 下一步
+    el-button(type="primary", @click="next") 提交
+    el-button() 上一步
 
 </template>
 

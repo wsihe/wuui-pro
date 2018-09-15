@@ -1,6 +1,7 @@
 <template lang="pug">
   div(:class="$style.step")
     el-button(type="primary", @click="next") 继续添加
+    el-button() 查看商品
 
 </template>
 
