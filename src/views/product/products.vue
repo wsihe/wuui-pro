@@ -4,20 +4,34 @@
       el-form(:model='formInline', :inline="true")
         el-row(:gutter="48")
           el-col(:xs="24", :sm="8", :md="8", :lg="8", :xl="8")
-            el-form-item(label='审批人')
-              el-input(v-model='formInline.user', placeholder='审批人')
+            el-form-item(label='活动区域')
+              el-input(v-model='formInline.user', placeholder='活动区域')
           el-col(:xs="24", :sm="8", :md="8", :lg="8", :xl="8")
             el-form-item(label='活动区域')
               el-select(v-model='formInline.region', placeholder='活动区域')
                 el-option(label='区域一', value='shanghai')
                 el-option(label='区域二', value='beijing')
+          template(v-if="showMore")
+            el-col(:xs="24", :sm="8", :md="8", :lg="8", :xl="8")
+              el-form-item(label='审批人')
+                el-input(v-model='formInline.user', placeholder='审批人')
+            el-col(:xs="24", :sm="8", :md="8", :lg="8", :xl="8")
+              el-form-item(label='活动区域')
+                el-select(v-model='formInline.region', placeholder='活动区域')
+                  el-option(label='区域一', value='shanghai')
+                  el-option(label='区域二', value='beijing')
+            el-col(:xs="24", :sm="8", :md="8", :lg="8", :xl="8")
+              el-form-item(label='活动区域')
+                el-select(v-model='formInline.region', placeholder='活动区域')
+                  el-option(label='区域一', value='shanghai')
+                  el-option(label='区域二', value='beijing')
           el-col(:xs="24", :sm="8", :md="8", :lg="8", :xl="8")
             el-form-item
               el-button(type='primary', @click='onSubmit') 查询
               el-button(@click='onSubmit') 重置
-              el-button(type="text")
+              el-button(type="text", @click='toggleShowMore')
                 span 展开
-                i.el-icon-arrow-down
+                i(:class="`el-icon-arrow-${iconType}`")
       el-table(ref='multipleTable', :data='tableData3', tooltip-effect='dark', style='width: 100%', @selection-change='handleSelectionChange')
         el-table-column(type='selection', width='55')
         el-table-column(label='日期', width='120')
@@ -42,6 +56,7 @@ export default {
         user: '',
         region: ''
       },
+      showMore: false,
       tableData3: [{
         date: '2016-05-03',
         name: '王小虎',
@@ -81,10 +96,16 @@ export default {
   destroyed () {
   },
   computed: {
+    iconType () {
+      return this.showMore ? 'up' : 'down'
+    }
   },
   watch: {
   },
   methods: {
+    toggleShowMore () {
+      this.showMore = !this.showMore
+    },
     onSubmit() {
       console.log('submit!')
     },
