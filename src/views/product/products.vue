@@ -106,7 +106,7 @@ export default {
     toggleShowMore () {
       this.showMore = !this.showMore
     },
-    onSubmit() {
+    onSubmit () {
       console.log('submit!')
     },
     toggleSelection (rows) {
