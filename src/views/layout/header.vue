@@ -5,7 +5,7 @@
     div(:class="$style.right")
       span(:class="[$style.action, $style.search]", @click="toggleSearch" v-clickoutside="closeSearch")
         i.el-icon-search()
-        el-input(ref="input", :class="[$style.input, {[$style.show]: showInput}]", v-model="search" placeholder="订单编号")
+        el-input(ref="input", :class="[$style.input, {[$style.show]: showInput}]", v-model="search" placeholder="商品名称/编号")
       span(:class="[$style.action, $style.noticeButton]")
         el-badge(:class="$style.badge", :value="100", :max="10")
           i.el-icon-bell
@@ -150,13 +150,13 @@ export default {
       border-radius 0
       transition width .3s,margin-left .3s
       width 0
-      &:global(.el-input--medium .el-input__inner)
+      &:global(.el-input .el-input__inner)
         border none
         border-radius 0
       &.show
         margin-left 8px
         width 210px
-        &:global(.el-input--medium .el-input__inner)
+        &:global(.el-input .el-input__inner)
           border-bottom 1px solid #d9d9d9
     .badge
       font-size 18px

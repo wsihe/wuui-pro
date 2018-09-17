@@ -60,13 +60,10 @@ export default {
     display block
 
     .content
-      margin 24px 0
+      margin 48px 0
 
      :global
       .el-step__title.is-wait
         font-weight normal
         color alpha(#000, 45%)
-      .el-form
-        width 400px
-        margin 24px auto
 </style>

@@ -3,19 +3,22 @@ import CardGrid from './card-grid'
 import Chart from './charts'
 import ChartCard from './chart-card'
 import Icon from './icon'
+import Design from './design'
+import Result from './result'
 
 const components = [
   Card,
   CardGrid,
   Chart,
   ChartCard,
-  Icon
+  Icon,
+  Design,
+  Result
 ]
 
 const install = function (Vue, opts = {}) {
   if (install.installed) return
   components.map(component => {
-    console.log(component.name)
     Vue.component(component.name, component)
   })
 }
@@ -31,5 +34,7 @@ export default {
   Chart,
   ChartCard,
   Icon,
+  Design,
+  Result,
   install
 }
