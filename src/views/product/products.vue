@@ -38,9 +38,14 @@
           template(slot-scope='scope') {{ scope.row.date }}
         el-table-column(prop='name', label='姓名', width='120')
         el-table-column(prop='address', label='地址', show-overflow-tooltip='')
+        el-table-column(fixed='right', label='操作', width='100')
+          template(slot-scope='scope')
+            el-button(@click='', type='text') 查看
+            el-button(type='text') 编辑
+
       div(style='margin-top: 20px')
-        el-button(@click='toggleSelection([tableData3[1], tableData3[2]])') 切换选中状态
-        el-button(@click='toggleSelection()') 取消选择
+          el-button(@click='toggleSelection([tableData3[1], tableData3[2]])') 切换选中状态
+          el-button(@click='toggleSelection()') 取消选择
 
 </template>
 

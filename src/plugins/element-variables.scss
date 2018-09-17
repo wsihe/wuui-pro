@@ -6,6 +6,10 @@ For example, to overwrite the theme color:
 $--color-primary: #40a9ff !default;
 $--font-weight-primary: 400 !default;
 
+$--table-header-color: rgba(0,0,0,.85) !default;
+$--table-header-background: #fafafa !default;
+
+
 /* icon font path, required */
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
