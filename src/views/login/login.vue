@@ -165,7 +165,7 @@ export default {
     padding 32px 0
     flex 1
 
-  @media (min-width: $screen-md-min)
+  @media (min-width: $screen-md)
     .content
       padding 112px 0 24px 0
 
