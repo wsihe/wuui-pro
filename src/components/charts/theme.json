@@ -15,60 +15,6 @@
 			"fontSize": 14
 		}
 	},
-	"line": {
-		"itemStyle": {
-			"normal": {
-				"borderWidth": "2"
-			}
-		},
-		"lineStyle": {
-			"normal": {
-				"width": "3"
-			}
-		},
-		"symbolSize": "5",
-		"symbol": "circle",
-		"smooth": false
-	},
-	"radar": {
-		"itemStyle": {
-			"normal": {
-				"borderWidth": "2"
-			}
-		},
-		"lineStyle": {
-			"normal": {
-				"width": "3"
-			}
-		},
-		"symbolSize": "10",
-		"symbol": "emptyCircle",
-		"smooth": true
-	},
-	"bar": {
-		"itemStyle": {
-			"normal": {
-				"barBorderWidth": "0",
-				"barBorderColor": "#444444"
-			},
-			"emphasis": {
-				"barBorderWidth": "0",
-				"barBorderColor": "#444444"
-			}
-		}
-	},
-	"pie": {
-		"itemStyle": {
-			"normal": {
-				"borderWidth": "0",
-				"borderColor": "#444444"
-			},
-			"emphasis": {
-				"borderWidth": "0",
-				"borderColor": "#444444"
-			}
-		}
-	},
 	"candlestick": {
 		"itemStyle": {
 			"normal": {
@@ -162,80 +108,6 @@
 			}
 		}
 	},
-	"logAxis": {
-		"axisLine": {
-			"show": true,
-			"lineStyle": {
-				"color": "#cccccc"
-			}
-		},
-		"axisTick": {
-			"show": false,
-			"lineStyle": {
-				"color": "#333333"
-			}
-		},
-		"axisLabel": {
-			"show": true,
-			"textStyle": {
-				"color": "#666666"
-			}
-		},
-		"splitLine": {
-			"show": true,
-			"lineStyle": {
-				"color": [
-					"#eeeeee"
-				]
-			}
-		},
-		"splitArea": {
-			"show": false,
-			"areaStyle": {
-				"color": [
-					"rgba(250,250,250,0.3)",
-					"rgba(200,200,200,0.3)"
-				]
-			}
-		}
-	},
-	"timeAxis": {
-		"axisLine": {
-			"show": true,
-			"lineStyle": {
-				"color": "#cccccc"
-			}
-		},
-		"axisTick": {
-			"show": false,
-			"lineStyle": {
-				"color": "#333333"
-			}
-		},
-		"axisLabel": {
-			"show": true,
-			"textStyle": {
-				"color": "#666666"
-			}
-		},
-		"splitLine": {
-			"show": true,
-			"lineStyle": {
-				"color": [
-					"#eeeeee"
-				]
-			}
-		},
-		"splitArea": {
-			"show": false,
-			"areaStyle": {
-				"color": [
-					"rgba(250,250,250,0.3)",
-					"rgba(200,200,200,0.3)"
-				]
-			}
-		}
-	},
 	"toolbox": {
 		"iconStyle": {
 			"normal": {
@@ -268,46 +140,6 @@
 		},
 		"extraCssText": "border-radius:2px; opacity: 0.8; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);"
 	},
-	"timeline": {
-		"lineStyle": {
-			"color": "#349e8e",
-			"width": 1
-		},
-		"itemStyle": {
-			"normal": {
-				"color": "#349e8e",
-				"borderWidth": "1"
-			},
-			"emphasis": {
-				"color": "#57e8d2"
-			}
-		},
-		"controlStyle": {
-			"normal": {
-				"color": "#349e8e",
-				"borderColor": "#349e8e",
-				"borderWidth": "0"
-			}
-		},
-		"checkpointStyle": {
-			"color": "#22c3aa",
-			"borderColor": "rgba(34,195,170,0.25)"
-		},
-		"label": {
-			"normal": {
-				"textStyle": {
-					"color": "#349e8e"
-				}
-			}
-		}
-	},
-	"visualMap": {
-		"color": [
-			"#d0648a",
-			"#22c3aa",
-			"rgba(123,217,165,0.2)"
-		]
-	},
 	"dataZoom": {
 		"backgroundColor": "#fff",
 		"dataBackgroundColor": "#dedede",
@@ -318,18 +150,66 @@
 			"color": "#999"
 		}
 	},
-	"markPoint": {
-		"label": {
+	"line": {
+		"itemStyle": {
 			"normal": {
-				"textStyle": {
-					"color": "#ffffff"
-				}
+				"borderWidth": "2"
+			}
+		},
+		"lineStyle": {
+			"normal": {
+				"width": "3"
+			}
+		},
+		"symbolSize": "5",
+		"symbol": "circle",
+		"smooth": false
+	},
+	"radar": {
+		"itemStyle": {
+			"normal": {
+				"borderWidth": "2"
+			}
+		},
+		"lineStyle": {
+			"normal": {
+				"width": "3"
+			}
+		},
+		"symbolSize": "10",
+		"symbol": "emptyCircle",
+		"smooth": true
+	},
+	"bar": {
+		"itemStyle": {
+			"normal": {
+				"barBorderWidth": "0",
+				"barBorderColor": "#444444"
 			},
 			"emphasis": {
-				"textStyle": {
-					"color": "#ffffff"
-				}
+				"barBorderWidth": "0",
+				"barBorderColor": "#444444"
 			}
 		}
+	},
+	"pie": {
+		"hoverAnimation": false,
+		"label": {
+			"show": false
+		},
+		"labelLine": {
+			"show": false
+		},
+		"itemStyle": {
+			"normal": {
+				"borderWidth": "0",
+				"borderColor": "#444444"
+			},
+			"emphasis": {
+				"borderWidth": "0",
+				"borderColor": "#444444"
+			}
+		},
+		"radius": ["55%", "75%"]
 	}
 }

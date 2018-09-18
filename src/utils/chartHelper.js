@@ -61,3 +61,31 @@ export const buildCardChart = (() => {
     series: []
   }
 })()
+
+export const buildPieChart = (() => {
+  return {
+    title: {
+      textStyle: {
+        fontSize: 16,
+        align: 'center'
+      },
+      subtextStyle: {
+        fontSize: 14,
+        align: 'center'
+      },
+      top: '45%',
+      left: '22%'
+    },
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      data: []
+    },
+    series: {
+      type: 'pie',
+      center: ['30%', '50%'],
+      data: []
+    }
+  }
+})()
