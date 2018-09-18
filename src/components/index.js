@@ -5,6 +5,7 @@ import ChartCard from './chart-card'
 import Icon from './icon'
 import Design from './design'
 import Result from './result'
+import Pagination from './pagination'
 
 const components = [
   Card,
@@ -13,7 +14,8 @@ const components = [
   ChartCard,
   Icon,
   Design,
-  Result
+  Result,
+  Pagination
 ]
 
 const install = function (Vue, opts = {}) {
@@ -36,5 +38,6 @@ export default {
   Icon,
   Design,
   Result,
+  Pagination,
   install
 }

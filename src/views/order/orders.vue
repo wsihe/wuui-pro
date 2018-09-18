@@ -1,22 +1,14 @@
 <template lang="pug">
   div(:class="$style.order")
-    wu-card
-      el-row
-        el-col(:xs="24", :sm="8", :md="8", :lg="8", :xl="8")
-          div(:class="$style.headerInfo")
-            span 待发货订单
-            p 8个
-            em
-        el-col(:xs="24", :sm="8", :md="8", :lg="8", :xl="8")
-          div(:class="$style.headerInfo")
-            span 本周订单平均处理时间
-            p 32分钟
-            em
-        el-col(:xs="24", :sm="8", :md="8", :lg="8", :xl="8")
-          div(:class="$style.headerInfo")
-            span 本周完成订单数
-            p 28个
-    wu-card(:class="$style.content")
+    wu-card(title="订单列表")
+      div(slot="extra")
+        el-radio-group(v-model='radio')
+          el-radio-button(label='待发货')
+          el-radio-button(label='待付款')
+          el-radio-button(label='已完成')
+        span(:class="$style.extraSearch")
+          el-input(placeholder='请输入内容', v-model='input' suffix-icon="el-icon-search")
+
 
 </template>
 
@@ -28,11 +20,14 @@
     },
     data () {
       return {
+        radio: '待发货',
+        input: ''
       }
     },
     created () {
     },
     mounted () {
+
     },
     destroyed () {
     },
@@ -49,28 +44,11 @@
   .order
     display block
 
-    .headerInfo
-      position relative
-      text-align center
-      & > span
-        color #999
-        display inline-block
-        font-size 14px
-        line-height 22px
-        margin-bottom 4px
-      & > p
-        color #333
-        font-size 24px
-        line-height 32px
-        margin 0
-      & > em
-        background-color #ededed
-        position absolute
-        height 56px
-        width 1px
-        top 0
-        right 0
-
     .content
       margin-top 24px
+
+    .extraSearch
+      display inline-block
+      width 272px
+      margin-left 16px
 </style>

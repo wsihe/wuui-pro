@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="[$style.card, {[$style.loading]: loading}]")
+  .wu-card(:class="[$style.card, {[$style.loading]: loading}]")
     div(:class="$style.head" v-if="title || extra || $slots.title || $slots.extra")
       div(:class="$style.wrapper")
           div(:class="$style.title" v-if="title || $slots.title")
