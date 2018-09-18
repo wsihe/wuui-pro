@@ -3,7 +3,10 @@ module.exports = {
   env: {
     node: true
   },
-  'extends': [
+  plugins: [
+    'vue'
+  ],
+  extends: [
     'plugin:vue/essential',
     '@vue/standard'
   ],

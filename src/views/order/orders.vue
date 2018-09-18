@@ -9,35 +9,34 @@
         span(:class="$style.extraSearch")
           el-input(placeholder='请输入内容', v-model='input' suffix-icon="el-icon-search")
 
-
 </template>
 
 <script>
-  export default {
-    name: 'BasicList',
-    components: {},
-    props: {
-    },
-    data () {
-      return {
-        radio: '待发货',
-        input: ''
-      }
-    },
-    created () {
-    },
-    mounted () {
-
-    },
-    destroyed () {
-    },
-    computed: {
-    },
-    watch: {
-    },
-    methods: {
+export default {
+  name: 'BasicList',
+  components: {},
+  props: {
+  },
+  data () {
+    return {
+      radio: '待发货',
+      input: ''
     }
+  },
+  created () {
+  },
+  mounted () {
+
+  },
+  destroyed () {
+  },
+  computed: {
+  },
+  watch: {
+  },
+  methods: {
   }
+}
 </script>
 
 <style lang="stylus" module>
