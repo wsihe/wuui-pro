@@ -132,7 +132,7 @@ export default {
       }
       this.$store.dispatch('LoginIn', this.ruleForm).then(() => {
         this.loading = false
-        this.$router.push({name: 'home_index'})
+        this.$router.push({name: 'home'})
       }).catch(() => {
         this.loading = false
       })

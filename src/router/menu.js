@@ -4,12 +4,12 @@ const menuData = [
   {
     name: '首页',
     icon: 'menu',
-    path: 'home_index'
+    path: 'home'
   },
   {
     name: '商品管理',
     icon: 'tickets',
-    path: 'home',
+    path: 'product',
     children: [
       {
         name: '添加商品',
@@ -24,7 +24,7 @@ const menuData = [
   {
     name: '订单中心',
     icon: 'document',
-    path: 'list',
+    path: 'order',
     children: [
       {
         name: '订单概况',
@@ -39,26 +39,18 @@ const menuData = [
   {
     name: '数据管理',
     icon: 'news',
-    path: 'profile',
+    path: 'analysis',
     children: [
       {
         name: '数据概况',
-        path: 'basic'
-      },
-      {
-        name: '商品分析',
-        path: 'advanced1'
-      },
-      {
-        name: '客户分析',
-        path: 'advanced2'
+        path: 'basicAnalysis'
       }
     ]
   },
   {
     name: '客户信息',
     icon: 'search',
-    path: 'exception',
+    path: 'customer',
     children: [
       {
         name: '客户列表',
@@ -67,17 +59,24 @@ const menuData = [
     ]
   },
   {
-    name: '个人中心',
+    name: '微店设置',
     icon: 'setting',
-    path: 'result',
+    path: 'setting',
     children: [
       {
-        name: '基本信息',
-        path: 'success'
-      },
+        name: '展示设置',
+        path: 'setting'
+      }
+    ]
+  },
+  {
+    name: '个人中心',
+    icon: 'refresh',
+    path: 'user',
+    children: [
       {
-        name: '设置',
-        path: 'fail'
+        name: '个人设置',
+        path: 'user'
       }
     ]
   }
