@@ -1,26 +1,30 @@
 <template lang="pug">
-  .sidebar-container
-    el-menu(
-      @select="changeMenu",
-      :default-active='$route.name',
-      :collapse='!isCollapse',
-      background-color="#001529",
-      text-color="hsla(0,0%,100%,.65)",
-      active-text-color="#108ee9",
-      unique-opened)
-      div(:class="$style.logo")
-        a
-          img(src="~@/assets/logo.png")
-          h1 Wuui Pro
-      template(v-for="item in menus")
-        el-menu-item(v-if="item.leaf", :index="item.path")
-          i(:class="`el-icon-${item.icon}`")
-          span(slot='title') {{item.name}}
-        el-submenu(v-else, :index="item.icon", :key="item.icon")
-          template(slot='title')
+  div(:class="$style.sidebar")
+    el-scrollbar
+      el-menu(
+        @select="changeMenu",
+        :default-active='$route.name',
+        :collapse='!isCollapse',
+        background-color="#001529",
+        text-color="hsla(0,0%,100%,.65)",
+        active-text-color="#108ee9",
+        unique-opened)
+        div(:class="[$style.logo, {[$style.collapseLogo]: !isCollapse}]")
+          a
+            img(src="~@/assets/logo.png")
+            h1 Wuui Pro
+        template(v-for="item in menus")
+          el-menu-item(v-if="item.leaf", :index="item.path")
             i(:class="`el-icon-${item.icon}`")
             span(slot='title') {{item.name}}
-          el-menu-item(:index="childMenu.path", v-for="(childMenu, index) in item.children",:key="childMenu.path") {{childMenu.name}}
+          el-submenu(v-else, :index="item.icon", :key="item.icon")
+            template(slot='title')
+              i(:class="`el-icon-${item.icon}`")
+              span(slot='title') {{item.name}}
+            el-menu-item(
+              :index="childMenu.path",
+              v-for="(childMenu, index) in item.children",
+              :key="childMenu.path") {{childMenu.name}}
 </template>
 
 <script>
@@ -73,47 +77,50 @@ export default {
 </script>
 
 <style lang="stylus" module>
-  @import "~@/styles/define.styl"
+  .sidebar
+    width 100%
 
-  .sider
-    min-height 100vh
-    box-shadow 2px 0 6px rgba(0, 21, 41, 0.35)
-    z-index 10
+    :global
+      .el-scrollbar
+        position fixed
+        top 0
+        left 0
+        bottom 0
+        height 100%
+        overflow hidden
+        background #001529
+        box-shadow 2px 0 6px rgba(0, 21, 41, 0.35)
+        z-index 10
+      .el-scrollbar__wrap
+        overflow-x hidden !important
+      .el-scrollbar__view
+        height 100%
+      .el-menu
+        border-right none
+        &:not(.el-menu--collapse)
+          width 256px
 
-  :global
-    .el-menu
-      border none
-      &:not(.el-menu--collapse)
-        width 256px
-    .el-submenu .el-menu-item
-      padding-left 50px !important
-    .el-menu--collapse > .el-menu-item span,
-    .el-menu--collapse > .el-submenu > .el-submenu__title span
-      height 0
-      width 0
+    .logo
+      position relative
+      height 64px
+      line-height 64px
+      padding-left 22px
+      transition all .28s
+      background #002140
       overflow hidden
-      visibility hidden
-      display inline-block
-
-  .logo
-    position relative
-    height 64px
-    line-height 64px
-    padding-left $menu-collapsed-width - 42px
-    transition all 0.3s
-    background #002140
-    overflow hidden
-    img
-      margin-top -3px
-      display inline-block
-      vertical-align middle
-      height 32px
-    h1
-      color white
-      display inline-block
-      vertical-align middle
-      font-size 20px
-      margin 0 0 0 12px
-      font-family 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif
-      font-weight 600
+      img
+        margin-top -3px
+        display inline-block
+        vertical-align middle
+        height 32px
+      h1
+        color white
+        display inline-block
+        vertical-align middle
+        font-size 20px
+        margin 0 0 0 12px
+        font-family 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif
+        font-weight 600
+    .collapseLogo
+      padding-left 17px
 </style>

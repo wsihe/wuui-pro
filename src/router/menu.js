@@ -61,7 +61,7 @@ const menuData = [
   {
     name: '微店设置',
     icon: 'setting',
-    path: 'setting',
+    path: 'shopSetting',
     children: [
       {
         name: '展示设置',
@@ -72,7 +72,7 @@ const menuData = [
   {
     name: '个人中心',
     icon: 'refresh',
-    path: 'user',
+    path: 'userCenter',
     children: [
       {
         name: '个人设置',

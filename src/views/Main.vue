@@ -1,8 +1,8 @@
 <template lang="pug">
   layout(has-sider)
-    layout(type="sider")
+    layout.sidebar-container(type="sider")
       wu-sider
-    layout
+    layout.main-container(:class="{hasHideSider: !opened}")
       layout(type="header")
         wu-header
       layout(type="content")
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import layout from './layout/layout'
 import {wuFooter, wuHeader, wuSider} from './layout'
 export default {
@@ -21,6 +22,22 @@ export default {
     wuSider,
     wuHeader,
     wuFooter
+  },
+  computed: {
+    ...mapGetters([
+      'opened'
+    ])
+  },
+  watch: {
   }
 }
 </script>
+<style lang="stylus">
+  .main-container
+    margin-left 256px
+    min-height 100%
+    position relative
+    transition margin-left .28s
+    &.hasHideSider
+      margin-left 64px
+</style>

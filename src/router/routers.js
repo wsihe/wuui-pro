@@ -102,7 +102,7 @@ export default [
   },
   {
     path: '/setting',
-    name: 'setting',
+    name: 'shop',
     meta: {
       title: '微店'
     },
@@ -118,7 +118,7 @@ export default [
   },
   {
     path: '/user',
-    name: 'user',
+    name: 'center',
     meta: {
       title: '个人'
     },
