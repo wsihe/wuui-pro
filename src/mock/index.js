@@ -1,10 +1,10 @@
 import Mock from 'mockjs'
-import loginAPI from './login'
+import userAPI from './user'
 
 // 登录相关
-Mock.mock(/\/login\/login/, loginAPI.login)
-Mock.mock(/\/user\/get_info/, loginAPI.getUserInfo)
-Mock.mock(/\/login\/logout/, loginAPI.logout)
+Mock.mock(/\/login\/login/, userAPI.login)
+Mock.mock(/\/user\/get_info/, userAPI.getUserInfo)
+Mock.mock(/\/login\/logout/, userAPI.logout)
 
 Mock.setup({
   timeout: 400

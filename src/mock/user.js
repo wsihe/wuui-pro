@@ -1,14 +1,8 @@
 import { getParams } from '@/utils'
 const USER_MAP = {
-  super_admin: {
-    name: 'super_admin',
-    user_id: '1',
-    access: ['super_admin', 'admin'],
-    token: 'super_admin'
-  },
   admin: {
     name: 'river',
-    user_id: '2',
+    user_id: '1',
     access: ['admin'],
     token: 'admin'
   }
@@ -16,30 +10,32 @@ const USER_MAP = {
 
 export default {
   login (request) {
-    request = JSON.parse(request.body)
-    if (!USER_MAP[request.username]) {
-      return
+    const {password, username} = JSON.parse(request.body)
+    if (password === '888888' && username === 'admin') {
+      return {
+        status: 'ok',
+        data: {
+          token: USER_MAP[username].token,
+          userName: USER_MAP[username].name
+        }
+      }
     }
     return {
-      code: 200,
-      data: {
-        token: USER_MAP[request.username].token,
-        userName: USER_MAP[request.username].name
-      },
+      status: 'error',
       msg: ''
     }
   },
   getUserInfo (request) {
     const params = getParams(request.url)
     return {
-      code: 200,
+      status: 'ok',
       data: USER_MAP[params.token],
       msg: ''
     }
   },
   logout () {
     return {
-      code: 200,
+      status: 'ok',
       data: null,
       msg: ''
     }

@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="$style.container")
+  div(:class="$style.login")
     div(:class="$style.content")
       div(:class="$style.top")
         div(:class="$style.header")
@@ -11,29 +11,41 @@
           el-tab-pane(label="账户密码登录" name="account")
           el-tab-pane(label="手机号登录" name="mobile")
           el-alert(v-if="!!errorText", :class="$style.alert", :title="errorText", type="error", show-icon, :closable="false")
-          el-form(:model="ruleForm", :rules="rules" ref="ruleForm")
+          el-form(:model="ruleForm", :rules="rules" ref="ruleForm" size="medium")
             template(v-if="activeName === 'account'")
               el-form-item(prop="username", key="username")
-                el-input(v-model="ruleForm.username", auto-complete="off", placeholder="admin")
-                  i.el-icon-edit-outline(slot="prefix")
+                el-input(
+                  prefix-icon="el-icon-edit-outline",
+                  v-model="ruleForm.username",
+                  auto-complete="off",
+                  placeholder="admin")
               el-form-item(prop="password", key="password")
-                el-input(v-model="ruleForm.password", auto-complete="off", placeholder="888888")
-                  i.el-icon-setting(slot="prefix")
+                el-input(
+                  prefix-icon="el-icon-setting",
+                  v-model="ruleForm.password",
+                  auto-complete="off",
+                  placeholder="888888")
             template(v-if="activeName === 'mobile'")
               el-form-item(prop="mobile", key="mobile")
-                el-input(v-model="ruleForm.mobile", auto-complete="off", placeholder="请输入手机号")
-                  i.el-icon-mobile-phone(slot="prefix")
+                el-input(
+                  prefix-icon="el-icon-mobile-phone",
+                  v-model="ruleForm.mobile",
+                  auto-complete="off",
+                  placeholder="请输入手机号")
               el-form-item(prop="captcha", key="captcha")
                 el-row(:gutter="10")
                   el-col(:span="16")
-                    el-input(v-model="ruleForm.captcha", auto-complete="off", placeholder="请输入验证码")
-                      i.el-icon-message(slot="prefix")
+                    el-input(
+                      prefix-icon="el-icon-message",
+                      v-model="ruleForm.captcha",
+                      auto-complete="off",
+                      placeholder="请输入验证码")
                   el-col(:span="8")
                     el-button(:class="$style.button", @click="onGetCaptcha", :disabled="!!count") {{captchaText}}
         div
           el-checkbox(v-model="checked") 自动登陆
-          el-button(:class="$style.right" type="text") 忘记密码
-        el-button(:class="$style.submit" type="primary",:loading="loading", @click="submitForm") 登陆
+          el-button(size="medium", :class="$style.right" type="text") 忘记密码
+        el-button(:class="$style.submit" type="primary",:loading="loading", size="medium", @click="submitForm") 登陆
     div(:class="$style.footer")
       span Copyright
       span(:class="$style.copyright") @ 2018 by river
@@ -144,12 +156,7 @@ export default {
 <style lang="stylus" module>
   @import "~@/styles/define.styl"
 
-  .right
-    padding 0
-    color #999
-    float right
-
-  .container
+  .login
     display flex
     flex-direction column
     height 100vh
@@ -160,6 +167,11 @@ export default {
       .el-tabs .el-tabs__header
         margin 0  auto 24px
         width 194px
+      .el-form-item.is-success .el-input__inner
+        border-color #dcdfe6
+        &:focus
+          outline none
+          border-color #40a9ff
 
   .content
     padding 32px 0
@@ -211,6 +223,11 @@ export default {
   .submit
     width 100%
     margin-top 24px
+
+  .right
+    padding 0
+    color #999
+    float right
 
   .footer
     padding 0 16px

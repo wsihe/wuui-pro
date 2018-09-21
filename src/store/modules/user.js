@@ -11,7 +11,6 @@ const user = {
       state.name = name
     },
     SET_TOKEN (state, token) {
-      console.log(token)
       state.token = token
       setToken(token)
     }
@@ -19,7 +18,7 @@ const user = {
   actions: {
     async LoginIn ({commit}, {username, password}) {
       let res = await login(username, password)
-      if (res.code === 200 && res.data) {
+      if (res.status === 'ok' && res.data) {
         commit('SET_USER_NAME', res.data.name)
         commit('SET_TOKEN', res.data.token)
       }
