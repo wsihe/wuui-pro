@@ -4,7 +4,9 @@
 <div align="center">
 
 
-基于真实案例(商城管理系统)的中台前端/设计解决方案。
+
+基于真实案例（商城管理系统）的中台前端/设计解决方案。
+
 
 
 ![](./github/pro.png)
@@ -16,7 +18,7 @@
 
 ### 技术栈
 
-vue + echart + element-ui + axios + webpack + ES6/7 + pug + stylus
+vue + echart + element-ui + axios + pug + stylus
 
 
 ### 项目运行
