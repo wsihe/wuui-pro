@@ -2,7 +2,10 @@
 <h1 align="center">Wuui Pro</h1>
 
 <div align="center">
-基于真实案例的中台前端/设计解决方案。
+
+
+基于真实案例(商城管理系统)的中台前端/设计解决方案。
+
 
 ![](./github/pro.png)
 
