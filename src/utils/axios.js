@@ -1,5 +1,4 @@
 import Axios from 'axios'
-const debug = console.log
 // import Cookies from 'js-cookie'
 // import { TOKEN_KEY } from '@/libs/util'
 class HttpRequest {
@@ -27,15 +26,6 @@ class HttpRequest {
     // 添加响应拦截器
     instance.interceptors.response.use((res) => {
       let { data } = res
-      if (data.status !== 'ok') {
-        if (data.status === 401) {
-          // Cookies.remove(TOKEN_KEY)
-          debug('未登录，或登录失效，请登录')
-        } else {
-          if (data.msg) console.error(data.msg)
-        }
-        return false
-      }
       return data
     }, (error) => {
       return Promise.reject(error)

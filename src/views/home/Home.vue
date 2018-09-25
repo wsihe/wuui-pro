@@ -8,8 +8,9 @@
             el-tooltip(slot="action", content="总销售额" placement="top")
               wu-icon(name="info", :scale="1.5")
             div(slot="content")
-               span 周同比 12%
-               span 日同比 11%
+              el-row(:gutter="12")
+                el-col(:span="12") 周同比 12%
+                el-col(:span="12") 日同比 11%
             div(slot="footer")
               span(:class="$style.label") 日销售额
               span {{daySales | yuan}}
@@ -42,8 +43,9 @@
             el-tooltip(slot="action", content="访问-付款转化率" placement="top")
               wu-icon(name="info", :scale="1.5")
             div(slot="content")
-              span 周同比 12%
-              span 日同比 11%
+              el-row(:gutter="12")
+                el-col(:span="12") 周同比 12%
+                el-col(:span="12") 日同比 11%
             div(slot="footer")
               span(:class="$style.label") 日转化率
               span 11%
@@ -82,14 +84,10 @@
               div(:class="$style.salesRank")
                 h4 商品访问量排名
                 ul(:class="$style.rankingList")
-                  li
-                    span(:class="[$style.rankingItemNumber, {[$style.active]: true }]") 1
-                    span(:class="$style.rankingItemTitle") 农家蜂蜜
-                    span 1212
-                  li
-                    span(:class="[$style.rankingItemNumber, {[$style.active]: false }]") 1
-                    span(:class="$style.rankingItemTitle") 农家蜂蜜
-                    span 1212
+                  li(v-for="(product, index) in rankListData")
+                    span(:class="[$style.rankingItemNumber, {[$style.active]: index < 3 }]") {{index+1}}
+                    span(:class="$style.rankingItemTitle") {{product.name}}
+                    span {{product.total | numFormat}}
         el-tab-pane(label="销售量" name="second" lazy)
           el-row
             el-col(:xs="24", :sm="12", :md="12", :lg="16", :xl="6")
@@ -98,41 +96,42 @@
               div(:class="$style.salesRank")
                 h4 销量排名
                 ul(:class="$style.rankingList")
-                  li
-                    span(:class="[$style.rankingItemNumber, {[$style.active]: true }]") 1
-                    span(:class="$style.rankingItemTitle") 农家蜂蜜
-                    span 1212
-                  li
-                    span(:class="[$style.rankingItemNumber, {[$style.active]: false }]") 1
-                    span(:class="$style.rankingItemTitle") 农家蜂蜜
-                    span 1212
+                  li(v-for="(product, index) in rankListData")
+                    span(:class="[$style.rankingItemNumber, {[$style.active]: index < 3  }]") {{index+1}}
+                    span(:class="$style.rankingItemTitle") {{product.name}}
+                    span {{product.total | numFormat}}
     wu-card(:loading="loading", :class="$style.indicatorArea")
       el-carousel(:autoplay="false" arrow="always")
         el-carousel-item(v-for="item in 2", :key="item")
           wu-chart-card(title="付款金额", :content-height="36")
             template(slot="total") {{totalSales | yuan}}
             div(slot="content")
-              span 周同比 12%
-              span 日同比 11%
+              el-row(:gutter="12")
+                el-col(:span="12") 周同比 12%
+                el-col(:span="12") 日同比 11%
           wu-chart-card.active(title="客单价", :content-height="36")
             template(slot="total") {{totalSales | yuan}}
             div(slot="content")
-              span 周同比 12%
-              span 日同比 11%
+              el-row(:gutter="12")
+                el-col(:span="12") 周同比 12%
+                el-col(:span="12") 日同比 11%
           wu-chart-card(title="付款订单数", :content-height="36")
             template(slot="total") 123
             div(slot="content")
-              span 周同比 12%
-              span 日同比 11%
+              el-row(:gutter="12")
+                el-col(:span="12") 周同比 12%
+                el-col(:span="12") 日同比 11%
           wu-chart-card(title="付款人数", :content-height="36")
             template(slot="total") 231
             div(slot="content")
-              span 周同比 12%
-              span 日同比 11%
+              el-row(:gutter="12")
+                el-col(:span="12") 周同比 12%
+                el-col(:span="12") 日同比 11%
       wu-chart(:init-options="initOptions", :options="options")
 </template>
 
 <script>
+import { getHomeData } from '@/services/home'
 import { buildLineChart, buildCardChart } from '@/utils/chartHelper'
 export default {
   name: 'home',
@@ -143,12 +142,13 @@ export default {
     return {
       loading: true,
       activeName: 'first',
-      initCardOptions: {},
+      initCardOptions: buildCardChart,
       cardOptions: {},
       cardBarOptions: {},
-      initOptions: {},
+      initOptions: buildLineChart,
       options: {},
       barOptions: {},
+      rankListData: [],
 
       totalSales: 12134,
       daySales: 324,
@@ -157,80 +157,12 @@ export default {
     }
   },
   created () {
-    this.initOptions = buildLineChart
-    this.initCardOptions = buildCardChart
   },
   mounted () {
+    this.initData()
     setTimeout(() => {
       this.loading = false
     }, 600)
-    this.cardOptions = {
-      color: '#13c2c2',
-      xAxis: {
-        data: ['2018-01', '2018-02', '2018-03', '2018-04', '2018-05', '2018-06', '2018-07']
-      },
-      series: [
-        {
-          name: '浏览量',
-          type: 'line',
-          data: [120, 132, 101, 134, 90, 230, 210],
-          symbolSize: '0',
-          smooth: true,
-          areaStyle: {}
-        }
-      ]
-    }
-    this.cardBarOptions = {
-      grid: {
-        left: '0',
-        right: '0'
-      },
-      xAxis: {
-        data: ['2018-01', '2018-02', '2018-03', '2018-04', '2018-05', '2018-06', '2018-07']
-      },
-      series: [
-        {
-          name: '成交量',
-          type: 'bar',
-          data: [120, 132, 101, 134, 90, 230, 210]
-        }
-      ]
-    }
-    this.options = {
-      legend: {
-        data: ['浏览量', '访客数']
-      },
-      xAxis: {
-        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-      },
-      series: [
-        {
-          name: '浏览量',
-          type: 'line',
-          data: [120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-          name: '访客数',
-          type: 'line',
-          data: [220, 182, 191, 234, 290, 330, 310]
-        }
-      ]
-    }
-    this.barOptions = {
-      legend: {
-        show: false
-      },
-      xAxis: {
-        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-      },
-      series: [
-        {
-          name: '销售量',
-          type: 'bar',
-          data: [220, 182, 191, 234, 290, 330, 310]
-        }
-      ]
-    }
   },
   destroyed () {
   },
@@ -239,6 +171,98 @@ export default {
   watch: {
   },
   methods: {
+    async initData () {
+      try {
+        let data = await getHomeData()
+        const {visitData, salesData, visitData2, rankListData} = data
+        this.rankListData = rankListData
+        this.initCard(visitData)
+        this.initSales(salesData)
+        this.initIndicator(visitData2)
+      } catch (e) {
+
+      }
+    },
+    initCard (data) {
+      const xAxis = data.map(item => item.x)
+      const yAxis = data.map(item => item.y)
+      this.cardOptions = {
+        color: '#13c2c2',
+        xAxis: {
+          data: xAxis
+        },
+        series: [
+          {
+            name: '浏览量',
+            type: 'line',
+            data: yAxis,
+            symbolSize: '0',
+            smooth: true,
+            areaStyle: {}
+          }
+        ]
+      }
+      this.cardBarOptions = {
+        grid: {
+          left: '0',
+          right: '0'
+        },
+        xAxis: {
+          data: xAxis
+        },
+        series: [
+          {
+            name: '成交量',
+            type: 'bar',
+            data: yAxis
+          }
+        ]
+      }
+    },
+    initSales (data) {
+      const xAxis = data.map(item => item.x)
+      const yAxis = data.map(item => item.y)
+      this.barOptions = {
+        legend: {
+          show: false
+        },
+        xAxis: {
+          data: xAxis
+        },
+        series: [
+          {
+            name: '销售量',
+            type: 'bar',
+            data: yAxis
+          }
+        ]
+      }
+    },
+    initIndicator (data) {
+      const xAxis = data.map(item => item.x)
+      const yAxis1 = data.map(item => item.y)
+      const yAxis2 = data.map(item => item.y2)
+      this.options = {
+        legend: {
+          data: ['浏览量', '访客数']
+        },
+        xAxis: {
+          data: xAxis
+        },
+        series: [
+          {
+            name: '浏览量',
+            type: 'line',
+            data: yAxis1
+          },
+          {
+            name: '访客数',
+            type: 'line',
+            data: yAxis2
+          }
+        ]
+      }
+    }
   }
 }
 </script>
