@@ -1,24 +1,24 @@
 <template lang="pug">
-  layout(has-sider)
-    layout.sidebar-container(type="sider")
+  wu-layout(has-sider)
+    wu-layout.sidebar-container(type="sider")
       wu-sider
-    layout.main-container(:class="{hasHideSider: !opened}")
-      layout(type="header")
+    wu-layout.main-container(:class="{hasHideSider: !opened}")
+      wu-layout(type="header")
         wu-header
-      layout(type="content")
+      wu-layout(type="content")
         router-view(:key="$route.fullPath")
-      layout(type="footer")
+      wu-layout(type="footer")
         wu-footer
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import layout from './layout/layout'
+import wuLayout from './layout/layout'
 import {wuFooter, wuHeader, wuSider} from './layout'
 export default {
   name: 'home',
   components: {
-    layout,
+    wuLayout,
     wuSider,
     wuHeader,
     wuFooter
@@ -29,6 +29,9 @@ export default {
     ])
   },
   watch: {
+    opened (val) {
+      console.log(val)
+    }
   }
 }
 </script>

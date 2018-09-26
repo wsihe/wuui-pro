@@ -87,7 +87,7 @@ export default {
   @import "~@/styles/define.styl"
 
   .header
-    height 64px
+    height $layout-header-height
     padding 0 12px 0 0
     background #fff
     box-shadow 0 1px 4px rgba(0, 21, 41, 0.08)
@@ -101,7 +101,7 @@ export default {
         z-index 99
 
   .logo
-    height 64px
+    height $layout-header-height
     line-height 58px
     vertical-align top
     display inline-block
@@ -115,7 +115,7 @@ export default {
   .trigger
     cursor pointer
     font-size 18px
-    height 64px
+    height $layout-header-height
     line-height 64px
     padding 22px 24px
     transition all .3s,padding 0s
