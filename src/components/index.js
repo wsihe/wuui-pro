@@ -1,4 +1,5 @@
 import Card from './card'
+import Affix from './affix'
 import CardGrid from './card-grid'
 import Chart from './charts'
 import ChartCard from './chart-card'
@@ -9,6 +10,7 @@ import Pagination from './pagination'
 
 const components = [
   Card,
+  Affix,
   CardGrid,
   Chart,
   ChartCard,
@@ -32,6 +34,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
   version: '0.0.1',
   Card,
+  Affix,
   CardGrid,
   Chart,
   ChartCard,
