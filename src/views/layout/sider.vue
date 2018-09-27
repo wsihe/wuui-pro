@@ -77,6 +77,7 @@ export default {
 </script>
 
 <style lang="stylus" module>
+  $logo-height  = 54px
   .sidebar
     width 100%
 
@@ -102,8 +103,8 @@ export default {
 
     .logo
       position relative
-      height 64px
-      line-height 64px
+      height $logo-height
+      line-height $logo-height
       padding-left 22px
       transition all .28s
       background #002140

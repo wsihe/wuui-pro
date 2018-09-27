@@ -4,7 +4,7 @@
       wu-icon(:name="menuIcon", :scale="2.2")
     div(:class="$style.right")
       span(:class="[$style.action, $style.search]", @click="toggleSearch" v-clickoutside="closeSearch")
-        i.el-icon-search()
+        i.el-icon-search
         el-input(ref="input", :class="[$style.input, {[$style.show]: showInput}]", v-model="search" placeholder="商品名称/编号")
       span(:class="[$style.action, $style.noticeButton]")
         el-badge(:class="$style.badge", :value="100", :max="10")
@@ -84,14 +84,19 @@ export default {
 </script>
 
 <style lang="stylus" module>
-  @import "~@/styles/define.styl"
+  $text-color     = alpha(#000, 65%)
+  $header-height  = 54px
+  $primary-color  =  #108ee9
+  $primary-blue   =  #e6f7ff
 
   .header
-    height $layout-header-height
+    position relative
+    height $header-height
+    line-height $header-height
     padding 0 12px 0 0
     background #fff
-    box-shadow 0 1px 4px rgba(0, 21, 41, 0.08)
-    position relative
+    border-bottom 1px solid #f0f0f0
+    // box-shadow 0 1px 4px rgba(0, 21, 41, 0.08)
 
     :global
       .el-badge__content.is-fixed
@@ -100,27 +105,15 @@ export default {
         right 16px
         z-index 99
 
-  .logo
-    height $layout-header-height
-    line-height 58px
-    vertical-align top
-    display inline-block
-    padding 0 0 0 24px
-    cursor pointer
-    font-size 20px
-    img
-      display inline-block
-      vertical-align middle
-
   .trigger
     cursor pointer
     font-size 18px
-    height $layout-header-height
-    line-height 64px
-    padding 22px 24px
+    height $header-height
+    line-height $header-height
+    padding 17px 18px
     transition all .3s,padding 0s
     &:hover
-      background $primary-1
+      background $primary-blue
     :global
       .wu-icon
         position relative
@@ -129,18 +122,20 @@ export default {
   .right
     float right
     height 100%
+    overflow hidden
     .action
-      cursor pointer
-      padding 0 12px
       display inline-block
-      transition all 0.3s
       height 100%
+      padding 0 12px
+      transition all 0.3s
+      cursor pointer
       > i
         font-size 16px
         vertical-align middle
         color $text-color
       &:hover
-        background $primary-1
+        background $primary-blue
+
     .search
       padding 0 12px
       &:hover
@@ -158,12 +153,11 @@ export default {
         width 210px
         &:global(.el-input .el-input__inner)
           border-bottom 1px solid #d9d9d9
+
     .badge
       font-size 18px
     .noticeButton
       position relative
-      cursor pointer
-      display inline-block
       transition all 0.3s
       z-index 99
     .account
@@ -173,7 +167,6 @@ export default {
         height 24px
         line-height 24px
         border-radius 16px
-        margin 20px 8px 20px 0
         color $primary-color
         background rgba(255, 255, 255, 0.85)
         vertical-align middle
@@ -182,15 +175,12 @@ export default {
     display inline-block
     margin-right 8px
 
-  @media only screen and (max-width: $screen-md)
+  @media only screen and (max-width: 992px)
     .header
       .name
         display none
       i.trigger
         padding 0 12px
-      .logo
-        padding-right 12px
-        position relative
       .right
         position absolute
         right 12px

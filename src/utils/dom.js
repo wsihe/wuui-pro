@@ -11,7 +11,7 @@ const isServer = Vue.prototype.$isServer
  */
 export function on (element, event, handler) {
   if (element && event && handler) {
-    if (!isServer() && document.addEventListener) {
+    if (!isServer && document.addEventListener) {
       element.addEventListener(event, handler, false)
     } else {
       element.attachEvent('on' + event, handler)
@@ -27,7 +27,7 @@ export function on (element, event, handler) {
  */
 export function off (element, event, handler) {
   if (element && event) {
-    if (!isServer() && document.removeEventListener) {
+    if (!isServer && document.removeEventListener) {
       element.removeEventListener(event, handler, false)
     } else {
       element.detachEvent('on' + event, handler)

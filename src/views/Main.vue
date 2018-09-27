@@ -5,8 +5,12 @@
     wu-layout.main-container(:class="{hasHideSider: !opened}")
       wu-layout(type="header")
         wu-header
+        wu-affix
+          wu-tab-menu
       wu-layout(type="content")
-        router-view(:key="$route.fullPath")
+        // router-view(:key="$route.fullPath")
+        keep-alive(:include="cachedViews")
+          router-view(:key="$route.fullPath")
       wu-layout(type="footer")
         wu-footer
 </template>
@@ -15,9 +19,11 @@
 import { mapGetters } from 'vuex'
 import wuLayout from './layout/layout'
 import {wuFooter, wuHeader, wuSider} from './layout'
+import WuTabMenu from './layout/tabMenu'
 export default {
   name: 'home',
   components: {
+    WuTabMenu,
     wuLayout,
     wuSider,
     wuHeader,
@@ -25,13 +31,9 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'opened'
+      'opened',
+      'cachedViews'
     ])
-  },
-  watch: {
-    opened (val) {
-      console.log(val)
-    }
   }
 }
 </script>
