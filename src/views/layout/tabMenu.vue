@@ -6,6 +6,9 @@
       :to="tab",
       :key="tab.path") {{ tab.title }}
       i.el-icon-close(@click.prevent.stop="closeTab(tab)")
+    div(:class="[$style.tabItem, $style.plus]")
+      router-link(:to="{ name: 'default'}")
+        i.el-icon-plus
 </template>
 
 <script>
@@ -85,8 +88,10 @@ export default {
     width 100%
     height $tab-height
     background #fff
-    border-bottom solid 1px #d1d5da
+    border-bottom solid 1px #EDEDED
     box-shadow 0 1px 2px rgba(0,0,0,0.075)
+    user-select none
+
     .tabItem
       position relative
       width 150px
@@ -128,14 +133,32 @@ export default {
           :global(.el-icon-close:hover)
             background #91d5ff
 
-    :global(.el-icon-close)
-      position absolute
-      top 3px
-      right 8px
-      padding 1px
-      border-radius 50%
-      text-align center
-      transform-origin 100% 50%
-      &:hover
-        background-color #f3f8fc
+      &.plus
+        width 50px
+        padding 0 12px
+        &:hover
+          background none
+        &:before
+          opacity 1
+
+    :global
+      .el-icon-close
+        position absolute
+        top 3px
+        right 8px
+        padding 1px
+        border-radius 50%
+        text-align center
+        transform-origin 100% 50%
+        &:hover
+          background-color #f3f8fc
+
+      .el-icon-plus
+        padding 3px
+        color $item-color
+        font-weight 700
+        border-radius 50%
+        cursor pointer
+        &:hover
+          background-color $item-hover-color
 </style>

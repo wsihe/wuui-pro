@@ -10,6 +10,19 @@ export default [
     component: () => import('@/views/login/login.vue')
   },
   {
+    path: '/default',
+    name: '_default',
+    component: Main,
+    children: [
+      {
+        path: 'index',
+        name: 'default',
+        component: () => import('@/views/default/default.vue'),
+        meta: {title: '新页签'}
+      }
+    ]
+  },
+  {
     path: '/',
     name: '_home',
     redirect: '/home',
