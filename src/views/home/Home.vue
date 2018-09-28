@@ -50,27 +50,9 @@
               span(:class="$style.label") 日转化率
               span 11%
     wu-card(title="常用功能", :class="$style.commonArea")
-      wu-card-grid(:class="$style.grid")
-        wu-icon(name="add-product", :scale="2")
-        span 发布商品
-      wu-card-grid(:class="$style.grid")
-        wu-icon(name="order", :scale="2")
-        span 订单处理
-      wu-card-grid(:class="$style.grid")
-        wu-icon(name="data-analysis", :scale="2")
-        span 数据分析
-      wu-card-grid(:class="$style.grid")
-        wu-icon(name="coupon", :scale="2")
-        span 优惠
-      wu-card-grid(:class="$style.grid")
-        wu-icon(name="product", :scale="2")
-        span 商品管理
-      wu-card-grid(:class="$style.grid")
-        wu-icon(name="customers", :scale="2")
-        span 客户信息
-      wu-card-grid(:class="$style.grid")
-        wu-icon(name="activity", :scale="2")
-        span 活动中心
+      wu-card-grid(:class="$style.grid", v-for="item in tiles", :key="item.icon")
+        wu-icon(:name="item.icon", :scale="2")
+        span {{item.title}}
       wu-card-grid(:class="$style.grid")
         wu-icon(name="help", :scale="2")
         span 帮助
@@ -131,6 +113,7 @@
 </template>
 
 <script>
+import tilesData from '../default/tiles'
 import { getHomeData } from '@/services/home'
 import { buildLineChart, buildCardChart } from '@/utils/chartHelper'
 export default {
@@ -153,7 +136,8 @@ export default {
       totalSales: 12134,
       daySales: 324,
       totalVisits: 3243,
-      dayVisits: 12
+      dayVisits: 12,
+      tiles: tilesData
     }
   },
   created () {
