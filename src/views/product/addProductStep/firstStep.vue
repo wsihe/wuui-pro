@@ -9,6 +9,7 @@
         el-upload(
           action='https://jsonplaceholder.typicode.com/posts/',
           list-type='picture-card',
+          :before-upload="beforeUpload",
           :on-preview='handlePictureCardPreview',
           :on-remove='handleRemove')
           i.el-icon-plus
@@ -16,14 +17,15 @@
         el-dialog(:visible.sync='dialogVisible')
           img(width='100%', :src='dialogImageUrl', alt='')
       el-form-item(label="商品规格")
-        el-select(v-model="form.region", placeholder="请选择商品规格")
+        el-select(v-model="form.type", placeholder="请选择商品规格")
           el-option(label="规格一", value="1")
           el-option(label="规格二", value="2")
       el-form-item(label="价格" prop="price")
         el-input(v-model="form.price")
-          template(slot="prepend") ¥
+          span(slot="prefix") ¥
       el-form-item(label="划线价")
-        el-input(v-model="form.price")
+        el-input(v-model="form.linePrice")
+          span(slot="prefix") ¥
       el-form-item(label="库存")
         el-input-number(v-model="form.num", :min="0")
       el-form-item(label="描述")
@@ -41,7 +43,9 @@ export default {
     return {
       form: {
         name: '',
+        type: '',
         price: '',
+        linePrice: '',
         num: 1,
         desc: ''
       },
@@ -69,11 +73,23 @@ export default {
   },
   methods: {
     handleRemove (file, fileList) {
-      console.log(file, fileList)
+      // console.log(file, fileList)
     },
     handlePictureCardPreview (file) {
       this.dialogImageUrl = file.url
       this.dialogVisible = true
+    },
+    beforeUpload (file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
+
+      if (!isJPG) {
+        this.$message.error('上传图片只能是 JPG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传图片大小不能超过 2MB!')
+      }
+      return isJPG && isLt2M
     },
     submitForm () {
       this.$refs.form.validate((valid) => {
@@ -100,9 +116,17 @@ export default {
       .el-form
         width 400px
         margin 24px auto
+      .el-input__prefix
+        left 10px
+      .el-upload-list--picture-card .el-upload-list__item
+        width 100px
+        height 100px
       .el-upload--picture-card
+        width 100px
+        height 100px
+        line-height 98px
         > i
-          margin-right 5px
+          margin-right 3px
           font-size 14px
           color #40a9ff
           font-weight 700
