@@ -100,6 +100,8 @@ export default {
         border-right none
         &:not(.el-menu--collapse)
           width 256px
+      .el-submenu .el-menu-item
+        padding-left 50px !important
 
     .logo
       position relative
