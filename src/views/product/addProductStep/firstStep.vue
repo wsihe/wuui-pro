@@ -1,34 +1,35 @@
 <template lang="pug">
   div(:class="$style.step")
-    el-form(ref="form", :model="form", label-width="80px")
-      el-form-item(label="活动名称")
+    el-form(:model="form", label-width="80px", :rules="rules", ref="form")
+      el-form-item(label="商品名" prop="name")
         el-input(v-model="form.name")
-      el-form-item(label="活动区域")
-        el-select(v-model="form.region", placeholder="请选择活动区域")
-          el-option(label="区域一", value="shanghai")
-          el-option(label="区域二", value="beijing")
-      el-form-item(label="活动时间")
-        el-col(:span="11")
-          el-date-picker(type="date", placeholder="选择日期", v-model="form.date1", style="width: 100%;")
-        el-col.line(:span="2") -
-        el-col(:span="11")
-          el-time-picker(type="fixed-time", placeholder="选择时间", v-model="form.date2", style="width: 100%;")
-      el-form-item(label="即时配送")
-        el-switch(v-model="form.delivery")
-      el-form-item(label="活动性质")
-        el-checkbox-group(v-model="form.type")
-          el-checkbox(label="美食/餐厅线上活动", name="type")
-          el-checkbox(label="地推活动", name="type")
-          el-checkbox(label="线下主题活动", name="type")
-          el-checkbox(label="单纯品牌曝光", name="type")
-      el-form-item(label="特殊资源")
-        el-radio-group(v-model="form.resource")
-          el-radio(label="线上品牌商赞助")
-          el-radio(label="线下场地免费")
-      el-form-item(label="活动形式")
+      //el-form-item(label="分享描述")
+        el-input(v-model="form.desc")
+      el-form-item(label="商品图")
+        el-upload(
+          action='https://jsonplaceholder.typicode.com/posts/',
+          list-type='picture-card',
+          :on-preview='handlePictureCardPreview',
+          :on-remove='handleRemove')
+          i.el-icon-plus
+          span 添加图片
+        el-dialog(:visible.sync='dialogVisible')
+          img(width='100%', :src='dialogImageUrl', alt='')
+      el-form-item(label="商品规格")
+        el-select(v-model="form.region", placeholder="请选择商品规格")
+          el-option(label="规格一", value="1")
+          el-option(label="规格二", value="2")
+      el-form-item(label="价格" prop="price")
+        el-input(v-model="form.price")
+          template(slot="prepend") ¥
+      el-form-item(label="划线价")
+        el-input(v-model="form.price")
+      el-form-item(label="库存")
+        el-input-number(v-model="form.num", :min="0")
+      el-form-item(label="描述")
         el-input(type="textarea", v-model="form.desc")
       el-form-item
-        el-button(type="primary", @click="next") 下一步
+        el-button(type="primary", @click="submitForm") 下一步
 
 </template>
 
@@ -40,14 +41,20 @@ export default {
     return {
       form: {
         name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
+        price: '',
+        num: 1,
         desc: ''
-      }
+      },
+      rules: {
+        name: [
+          { required: true, message: '请输入商品名', trigger: 'change' }
+        ],
+        price: [
+          { required: true, message: '请输入价格', trigger: 'change' }
+        ]
+      },
+      dialogImageUrl: '',
+      dialogVisible: false
     }
   },
   created () {
@@ -61,6 +68,23 @@ export default {
   watch: {
   },
   methods: {
+    handleRemove (file, fileList) {
+      console.log(file, fileList)
+    },
+    handlePictureCardPreview (file) {
+      this.dialogImageUrl = file.url
+      this.dialogVisible = true
+    },
+    submitForm () {
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          this.next()
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
     next () {
       this.$store.commit('SET_PRODUCT_ACTIVE', 1)
     }
@@ -72,8 +96,16 @@ export default {
   .step
     display block
 
-  :global
-    .el-form
-      width 400px
-      margin 24px auto
+    :global
+      .el-form
+        width 400px
+        margin 24px auto
+      .el-upload--picture-card
+        > i
+          margin-right 5px
+          font-size 14px
+          color #40a9ff
+          font-weight 700
+        > span
+          color #40a9ff
 </style>
