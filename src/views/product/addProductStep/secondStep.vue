@@ -8,14 +8,18 @@
     div(:class="$style.buttonContent")
       el-button(type="primary", @click="next") 提交
       el-button() 上一步
-
+    wu-divider
+    common-desc
+      h3 说明
+      h4 商品详情
+      p 向客户展示商品的细节与优势，常见的内容有：1、整体展示；2、细节图片介绍；3、规格颜色说明；4、购买须知；
 </template>
 
 <script>
-
+import CommonDesc from './description'
 export default {
+  components: {CommonDesc},
   name: 'SecondStep',
-  components: {},
   props: {
   },
   data () {

@@ -31,14 +31,21 @@
       el-form-item(label="描述")
         el-input(type="textarea", v-model="form.desc")
       el-form-item
-        el-button(type="primary", @click="submitForm") 下一步
-
+        el-button(type="primary", @click="submitForm") 添加详情
+        el-button(@click="submitForm") 保存并提交
+    wu-divider
+    common-desc
+      h3 说明
+      h4 商品图
+      p 建议尺寸 800*800 像素，最大上传个数为10张。
+      h4 库存
+      p 库存为 0 时，会放到【已售罄】的商品列表中，保存后买家看到的商品可售库存同步更新。
 </template>
 
 <script>
+import CommonDesc from './description'
 export default {
-  props: {
-  },
+  components: {CommonDesc},
   data () {
     return {
       form: {
@@ -109,6 +116,7 @@ export default {
 </script>
 
 <style lang="stylus" module>
+  $text-color  = alpha(#000, 45%)
   .step
     display block
 
@@ -132,4 +140,6 @@ export default {
           font-weight 700
         > span
           color #40a9ff
+      .wu-divider
+        margin 40px 0 24px
 </style>

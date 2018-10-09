@@ -7,6 +7,7 @@ import Icon from './icon'
 import Design from './design'
 import Result from './result'
 import Pagination from './pagination'
+import Divider from './divider'
 
 const components = [
   Card,
@@ -17,7 +18,8 @@ const components = [
   Icon,
   Design,
   Result,
-  Pagination
+  Pagination,
+  Divider
 ]
 
 const install = function (Vue, opts = {}) {
@@ -42,5 +44,6 @@ export default {
   Design,
   Result,
   Pagination,
+  Divider,
   install
 }
