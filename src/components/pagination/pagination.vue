@@ -4,7 +4,8 @@
       @current-change='handleCurrentChange',
       :current-page.sync='currentPage',
       :page-size='pageSize',
-      layout='total, prev, pager, next, jumper',
+      :page-sizes='[10, 20, 30, 40]',
+      layout='total, sizes, prev, pager, next, jumper',
       :total='total')
 </template>
 
@@ -13,6 +14,12 @@ export default {
   name: 'WuPagination',
   components: {},
   props: {
+    params: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    }
   },
   data () {
     return {
@@ -27,6 +34,9 @@ export default {
   destroyed () {
   },
   computed: {
+    pageSize () {
+      return this.params.pageSize || 10
+    }
   },
   watch: {
   },

@@ -43,12 +43,20 @@
                 span 展开
                 i(:class="`el-icon-arrow-${iconType}`")
       el-button(icon="el-icon-plus", type='primary', @click='') 添加商品
-      el-button(@click='') 批量删除
-      el-button(@click='') 批量导出
-      el-alert(:class="$style.info", type="info", show-icon, :closable="false" title="已选择 3 项")
-      el-table(ref='multipleTable', :data='tableData3', tooltip-effect='dark', @selection-change='handleSelectionChange')
+      template(v-if="selection.length > 0")
+        el-button(@click='') 批量删除
+        el-button(@click='') 批量导出
+      el-alert(:class="$style.info", type="info", show-icon, :closable="false", :title="`已选择 ${selection.length} 项`")
+      el-table(ref='multipleTable', :data='tableData', tooltip-effect='dark', @selection-change='handleSelectionChange')
         el-table-column(type='selection', min-idth='55')
-        el-table-column(prop='name', label='商品', min-width='120')
+        el-table-column(label='商品 / 价格', min-width='120')
+          template(slot-scope='scope')
+            div(:class="$style.meta")
+              div(:class="$style.avatar")
+                img(src="~@/assets/avatar.jpg")
+              div(:class="$style.content")
+                h4  {{scope.row.name}}
+                div(:class="$style.price") {{scope.row.num | yuan}}
         el-table-column(prop='num', label='库存')
         el-table-column(prop='num', label='商品分组')
         el-table-column(prop='num', label='总销量')
@@ -56,11 +64,12 @@
           template(slot-scope='scope') {{ scope.row.date }}
         el-table-column(fixed='right', label='操作', width='100')
           template(slot-scope='scope')
-            el-button(@click='', type='text') 查看
             el-button(type='text') 编辑
+            el-button(@click='deleteRow(scope.$index, tableData)', type='text') 删除
 
+      wu-pagination
       <!--div(style='margin-top: 20px')-->
-          <!--el-button(@click='toggleSelection([tableData3[1], tableData3[2]])') 切换选中状态-->
+          <!--el-button(@click='toggleSelection([tableData[1], tableData[2]])') 切换选中状态-->
           <!--el-button(@click='toggleSelection()') 取消选择-->
 
 </template>
@@ -79,7 +88,7 @@ export default {
         group: ''
       },
       showMore: false,
-      tableData3: [{
+      tableData: [{
         date: '2016-05-03',
         name: '商品名称',
         num: 10
@@ -99,16 +108,8 @@ export default {
         date: '2016-05-08',
         name: '商品名称',
         num: 10
-      }, {
-        date: '2016-05-06',
-        name: '商品名称',
-        num: 10
-      }, {
-        date: '2016-05-07',
-        name: '商品名称',
-        num: 10
       }],
-      multipleSelection: []
+      selection: []
     }
   },
   created () {
@@ -141,7 +142,18 @@ export default {
       }
     },
     handleSelectionChange (val) {
-      this.multipleSelection = val
+      this.selection = val
+    },
+    deleteRow (index, rows) {
+      console.log(index)
+      this.$confirm('此操作将永久删除该商品, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        rows.splice(index, 1)
+      }).catch(() => {
+      })
     }
   }
 }
@@ -156,6 +168,33 @@ export default {
 
     .info
       margin 20px 0
+
+    .meta
+      display flex
+      align-items flex-start
+      .avatar
+        margin-right 16px
+        width 48px
+        height 48px
+        line-height 48px
+        border-radius 4px
+        overflow hidden
+        > img
+          display block
+          width 100%
+          height 100%
+      .content
+        flex 1 0
+      h4
+        color #409eff
+        margin-bottom 4px
+        font-size 14px
+        line-height 22px
+        cursor pointer
+      .price
+        color rgba(0,0,0,.65)
+        font-size 14px
+        line-height 22px
 
     :global
       .el-form
