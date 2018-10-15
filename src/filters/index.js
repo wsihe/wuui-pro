@@ -1,6 +1,7 @@
 import numeral from 'numeral'
 import Vue from 'vue'
 import dates from './dates'
+import matchs from './matchs'
 
 const normals = {
   /**
@@ -19,7 +20,8 @@ const normals = {
 export default function () {
   const filters = {
     ...normals,
-    ...dates
+    ...dates,
+    ...matchs
   }
 
   Object.keys(filters).forEach((key) => {
