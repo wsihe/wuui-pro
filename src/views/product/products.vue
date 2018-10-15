@@ -47,7 +47,12 @@
         el-button(@click='') 批量删除
         el-button(@click='') 批量导出
       el-alert(:class="$style.info", type="info", show-icon, :closable="false", :title="`已选择 ${selection.length} 项`")
-      el-table(ref='multipleTable', :data='tableData', tooltip-effect='dark', @selection-change='handleSelectionChange')
+      el-table(
+        ref='multipleTable',
+        :data='productList',
+        tooltip-effect='dark',
+        @sort-change="sortChange",
+        @selection-change='handleSelectionChange')
         el-table-column(type='selection', min-idth='55')
         el-table-column(label='商品 / 价格', min-width='120')
           template(slot-scope='scope')
@@ -56,25 +61,26 @@
                 img(src="~@/assets/avatar.jpg")
               div(:class="$style.content")
                 h4  {{scope.row.name}}
-                div(:class="$style.price") {{scope.row.num | yuan}}
-        el-table-column(prop='num', label='库存')
-        el-table-column(prop='num', label='商品分组')
-        el-table-column(prop='num', label='总销量')
-        el-table-column(label='创建时间')
-          template(slot-scope='scope') {{ scope.row.date }}
+                div(:class="$style.price") {{scope.row.price | yuan}}
+        el-table-column(prop='stock', label='库存')
+        el-table-column(prop='group', label='商品分组')
+        el-table-column(prop='sales', label='总销量')
+        el-table-column(label='创建时间', sortable='custom', prop="updatedAt")
+          template(slot-scope='scope') {{ scope.row.updatedAt }}
         el-table-column(fixed='right', label='操作', width='100')
           template(slot-scope='scope')
             el-button(type='text') 编辑
-            el-button(@click='deleteRow(scope.$index, tableData)', type='text') 删除
+            el-button(@click='deleteRow(scope.$index, productList)', type='text') 删除
 
-      wu-pagination
+      wu-pagination(:api="apiMethod", @list="queryProductList", :params="params")
       <!--div(style='margin-top: 20px')-->
-          <!--el-button(@click='toggleSelection([tableData[1], tableData[2]])') 切换选中状态-->
+          <!--el-button(@click='toggleSelection([productList[1], productList[2]])') 切换选中状态-->
           <!--el-button(@click='toggleSelection()') 取消选择-->
 
 </template>
 
 <script>
+import { getProductData } from '@/services/product'
 export default {
   name: 'product',
   components: {},
@@ -87,29 +93,11 @@ export default {
         type: '',
         group: ''
       },
+      params: {},
       showMore: false,
-      tableData: [{
-        date: '2016-05-03',
-        name: '商品名称',
-        num: 10
-      }, {
-        date: '2016-05-02',
-        name: '商品名称',
-        num: 10
-      }, {
-        date: '2016-05-04',
-        name: '商品名称',
-        num: 10
-      }, {
-        date: '2016-05-01',
-        name: '商品名称',
-        num: 10
-      }, {
-        date: '2016-05-08',
-        name: '商品名称',
-        num: 10
-      }],
-      selection: []
+      productList: [],
+      selection: [],
+      apiMethod: getProductData
     }
   },
   created () {
@@ -126,6 +114,18 @@ export default {
   watch: {
   },
   methods: {
+    sortChange (sortVal) {
+      const sort = `${sortVal.prop}-${sortVal.order}`
+      this.changeStatus(sort)
+    },
+    changeStatus (sort) {
+      this.params = {
+        sorter: sort
+      }
+    },
+    queryProductList (data) {
+      this.productList = data.list
+    },
     toggleShowMore () {
       this.showMore = !this.showMore
     },
@@ -145,7 +145,6 @@ export default {
       this.selection = val
     },
     deleteRow (index, rows) {
-      console.log(index)
       this.$confirm('此操作将永久删除该商品, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
