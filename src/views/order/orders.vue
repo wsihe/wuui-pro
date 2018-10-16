@@ -112,7 +112,8 @@ export default {
   data () {
     return {
       radio: '待发货',
-      input: ''
+      input: '',
+      loading: false
     }
   },
   created () {

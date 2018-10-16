@@ -9,7 +9,7 @@ Vue.use(Router)
 
 const LOGIN_VIEW_NAME = 'login'
 const router = new Router({
-  mode: 'history',
+  // mode: 'history',
   routes
 })
 
