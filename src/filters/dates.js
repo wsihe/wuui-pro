@@ -1,4 +1,4 @@
-import Moment from 'moment'
+import moment from 'moment'
 
 /**
  * 日期格式化filter
@@ -11,9 +11,8 @@ export default {
    * @params time      {Number}      时间，未转化的
    * @params [str]     {String}      转化规则，默认'2017.07.30'
    */
-  dateConvert (time, str = 'YYYY.MM.DD HH:mm:ss') {
+  dateConvert (time, str = 'YYYY-MM-DD HH:mm:ss') {
     if (time === null) { return '' }
-    time = Number(time)
-    return time && Moment(time).format(str)
+    return moment(time).format(str)
   }
 }
