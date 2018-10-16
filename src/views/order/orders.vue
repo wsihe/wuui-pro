@@ -2,13 +2,13 @@
   div(:class="$style.order")
     wu-card(title="订单列表")
       div(slot="extra")
-        el-radio-group(v-model='radio')
-          el-radio-button(label='全部')
-          el-radio-button(label='待付款')
-          el-radio-button(label='待发货')
-          el-radio-button(label='已发货')
-          el-radio-button(label='已完成')
-          el-radio-button(label='已关闭')
+        el-radio-group(v-model='status')
+          el-radio-button(label='') 全部
+          el-radio-button(label='0') 待付款
+          el-radio-button(label='1') 待发货
+          el-radio-button(label='2') 已发货
+          el-radio-button(label='3') 已完成
+          el-radio-button(label='4') 已关闭
         span(:class="$style.extraSearch")
           el-input(placeholder='商品名称/商品编号/订单号', v-model='input')
             template(slot="append")
@@ -28,82 +28,33 @@
             th 状态
             th 操作
         tbody
-          template
+          template(v-for="order in orderList")
             tr(:class="$style.step")
               td(colspan="5")
             tr(:class="$style.trTh")
               td(colspan="5")
                 div(:class="$style.orderTop")
-                  span 2018-09-26 09:11:54
+                  span {{order.updatedAt | dateConvert}}
                   span(:class="$style.label") 订单号：
-                  a(:class="$style.value") 78263503545
-            tr(:class="$style.trBd")
-              td
-                div(:class="$style.product")
-                  div(:class="$style.avatar")
-                    img(src="~@/assets/avatar.jpg")
-                    span 商品名称1
-                  span x 1
-              td(rowspan="2") 姓名
-              td(rowspan="2") 总额 ¥519.00
-              td(rowspan="2") 已付款
-              td(rowspan="2") 处理
-            tr(:class="$style.trBd")
-              td
-                div(:class="$style.product")
-                  div(:class="$style.avatar")
-                    img(src="~@/assets/avatar.jpg")
-                    span 商品名称2
-                  span x 3
-          tr(:class="$style.step")
-            td(colspan="5")
-          tr(:class="$style.trTh")
-            td(colspan="5")
-              div(:class="$style.orderTop")
-                span 2018-09-26 09:11:54
-                span(:class="$style.label") 订单号：
-                a(:class="$style.value") 78263503545
-          tr(:class="$style.trBd")
-            td
-              div(:class="$style.product")
-                div(:class="$style.avatar")
-                  img(src="~@/assets/avatar.jpg")
-                  span 商品名称
-                span x 4
-            td 姓名
-            td 总额 ¥119.00
-            td 已付款
-            td 处理
-          tr(:class="$style.step")
-            td(colspan="5")
-          tr(:class="$style.trTh")
-            td(colspan="5")
-              div(:class="$style.orderTop")
-                span 2018-09-26 09:11:54
-                span(:class="$style.label") 订单号：
-                a(:class="$style.value") 78263503545
-          tr(:class="$style.trBd")
-            td
-              div(:class="$style.product")
-                div(:class="$style.avatar")
-                  img(src="~@/assets/avatar.jpg")
-                  span 商品名称
-                span x 6
-            td(rowspan="2") 姓名
-            td(rowspan="2") 总额 ¥19.00
-            td(rowspan="2") 已付款
-            td(rowspan="2") 处理
-          tr(:class="$style.trBd")
-            td
-              div(:class="$style.product")
-                div(:class="$style.avatar")
-                  img(src="~@/assets/avatar.jpg")
-                  span 商品名称
-                span x 3
-      wu-pagination
+                  a(:class="$style.value") {{order.key}}
+            template(v-for="(product, index) in order.productList")
+              tr(:class="$style.trBd")
+                td
+                  div(:class="$style.product")
+                    div(:class="$style.avatar")
+                      img(src="~@/assets/avatar.jpg")
+                      span {{product.name}}
+                    span x {{product.num}}
+                template(v-if="index === 0")
+                  td(:rowspan="order.total") {{order.customer}}
+                  td(:rowspan="order.total") 总额：{{order.price | yuan}}
+                  td(:rowspan="order.total") {{order.status | orderStatus}}
+                  td(:rowspan="order.total") 处理
+      wu-pagination(:api="apiMethod", @list="queryOrderList", :params="params")
 </template>
 
 <script>
+import { queryOrders } from '@/services/order'
 export default {
   name: 'BasicList',
   components: {},
@@ -111,23 +62,38 @@ export default {
   },
   data () {
     return {
-      radio: '待发货',
+      status: '',
       input: '',
-      loading: false
+      loading: false,
+      params: {},
+      apiMethod: queryOrders,
+      orderList: []
     }
   },
   created () {
   },
   mounted () {
-
   },
   destroyed () {
   },
   computed: {
   },
   watch: {
+    status () {
+      this.handleSearch()
+    }
   },
   methods: {
+    handleSearch () {
+      this.loading = true
+      this.params = {
+        status: this.status
+      }
+    },
+    queryOrderList (data) {
+      this.orderList = data.list
+      this.loading = false
+    }
   }
 }
 </script>

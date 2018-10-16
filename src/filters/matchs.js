@@ -11,5 +11,15 @@ export default {
       '3': '爆款'
     }
     return map[type] || type
+  },
+  orderStatus (type) {
+    let map = {
+      '0': '待付款',
+      '1': '待发货',
+      '2': '已发货',
+      '3': '已完成',
+      '4': '已关闭'
+    }
+    return map[type] || type
   }
 }

@@ -1,17 +1,29 @@
-import { getParams } from '@/utils'
+import { getParams, uuid } from '@/utils'
 // mock orderListData
 let orderListData = []
-for (let i = 0; i < 46; i += 1) {
+
+function getList () {
+  let List = []
+  const len = Math.floor((Math.random() * 10) % 2) + 1
+  for (let i = 0; i < len; i += 1) {
+    List.push({
+      name: `农家蜂蜜 ${i}`,
+      price: Math.floor(Math.random() * 10) + 100,
+      num: Math.floor(Math.random() * 10) + 1
+    })
+  }
+  return List
+}
+for (let i = 0; i < 6; i += 1) {
   orderListData.push({
-    key: i,
-    avatar: '',
-    name: `农家蜂蜜 ${i}`,
-    price: Math.floor(Math.random() * 10) + 100,
-    stock: Math.floor(Math.random() * 10) + 10,
-    group: Math.floor(Math.random() * 10) % 4,
-    sales: Math.floor(Math.random() * 10) + 10,
+    key: uuid(8, true),
+    customer: `客户 ${i}`,
+    status: Math.floor(Math.random() * 10) % 5,
+    price: Math.floor(Math.random() * 10) + 200,
     updatedAt: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
-    createdAt: new Date(`2017-07-${Math.floor(i / 2) + 1}`)
+    createdAt: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
+    productList: getList(),
+    total: getList().length
   })
 }
 function getOrderList (request) {
@@ -19,18 +31,14 @@ function getOrderList (request) {
 
   let dataSource = orderListData
 
-  if (params.sorter) {
-    const s = params.sorter.split('_')
-    dataSource = dataSource.sort((prev, next) => {
-      if (s[1] === 'descending') {
-        return next[s[0]] - prev[s[0]]
-      }
-      return prev[s[0]] - next[s[0]]
-    })
-  }
-
   if (params.name) {
     dataSource = dataSource.filter(data => data.name.indexOf(params.name) > -1)
+  }
+
+  if (params.status) {
+    const status = params.status
+    let filterDataSource = dataSource.filter(data => parseInt(data.status, 10) === parseInt(status, 10))
+    dataSource = filterDataSource
   }
 
   let pageSize = 10
