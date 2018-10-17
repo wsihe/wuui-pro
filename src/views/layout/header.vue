@@ -85,7 +85,7 @@ export default {
 
 <style lang="stylus" module>
   $text-color     = alpha(#000, 65%)
-  $header-height  = 54px
+  $header-height  = 58px
   $primary-color  =  #108ee9
   $primary-blue   =  #e6f7ff
 
@@ -163,6 +163,7 @@ export default {
     .account
       .avatar
         display inline-block
+        margin-right 5px
         width 24px
         height 24px
         line-height 24px

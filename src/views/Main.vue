@@ -5,12 +5,18 @@
     wu-layout.main-container(:class="{hasHideSider: !opened}")
       wu-layout(type="header")
         wu-header
-        wu-affix
-          wu-tab-menu
-      wu-layout(type="content")
-        // router-view(:key="$route.fullPath")
-        keep-alive(:include="cachedViews")
-          router-view(:key="$route.fullPath")
+      wu-layout(type="content" v-if="!isTab")
+        router-view(:key="$route.fullPath")
+
+      // 页签模式
+      wu-layout(type="content" v-if="isTab")
+        .main-tab-container
+          wu-affix
+            wu-tab-menu
+          .main-tab-content
+            keep-alive(:include="cachedViews")
+              router-view(:key="$route.fullPath")
+
       wu-layout(type="footer")
         wu-footer
 </template>
@@ -29,6 +35,11 @@ export default {
     wuHeader,
     wuFooter
   },
+  data () {
+    return {
+      // isShowTab: false
+    }
+  },
   computed: {
     ...mapGetters([
       'opened',
@@ -45,4 +56,9 @@ export default {
     transition margin-left .28s
     &.hasHideSider
       margin-left 64px
+
+    .main-tab-container
+      margin -24px -24px 0
+    .main-tab-content
+      margin 24px 24px 0
 </style>

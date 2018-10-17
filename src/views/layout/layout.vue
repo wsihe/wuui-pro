@@ -81,7 +81,7 @@ export default {
       background $layout-header-background
       padding $layout-header-padding
       height $layout-header-height
-      //line-height $layout-header-height
+      line-height $layout-header-height
 
     &-footer
       padding $layout-footer-padding
