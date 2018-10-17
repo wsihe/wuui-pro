@@ -4,10 +4,13 @@ import router from './router'
 import store from './store'
 import initFilters from './filters'
 import initDirectives from './directives'
+import globalMix from './mixins/globalMix'
 import './plugins/element.js'
 import './mock'
 
 Vue.config.productionTip = false
+
+Vue.mixin(globalMix)
 
 initFilters()
 initDirectives()
