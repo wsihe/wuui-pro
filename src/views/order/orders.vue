@@ -10,7 +10,7 @@
           el-radio-button(label='3') 已完成
           el-radio-button(label='4') 已关闭
         span(:class="$style.extraSearch")
-          el-input(placeholder='商品名称/商品编号/订单号', v-model='input')
+          el-input(placeholder='商品名称/商品编号/订单号', v-model='name')
             template(slot="append")
               el-button(icon="el-icon-search")
               el-button
@@ -50,6 +50,9 @@
                   td(:rowspan="order.total") 总额：{{order.price | yuan}}
                   td(:rowspan="order.total") {{order.status | orderStatus}}
                   td(:rowspan="order.total") 处理
+          tr(:class="$style.trBd", v-if="!orderList.length")
+            td(colspan="6")
+              div 暂无相关订单
       wu-pagination(:api="apiMethod", @list="queryOrderList", :params="params")
 </template>
 
@@ -63,7 +66,7 @@ export default {
   data () {
     return {
       status: '',
-      input: '',
+      name: '',
       loading: false,
       params: {},
       apiMethod: queryOrders,
@@ -87,7 +90,8 @@ export default {
     handleSearch () {
       this.loading = true
       this.params = {
-        status: this.status
+        status: this.status,
+        name: this.name
       }
     },
     queryOrderList (data) {

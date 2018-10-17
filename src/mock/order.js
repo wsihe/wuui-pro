@@ -14,7 +14,9 @@ function getList () {
   }
   return List
 }
+
 for (let i = 0; i < 6; i += 1) {
+  let productList = getList()
   orderListData.push({
     key: uuid(8, true),
     customer: `客户 ${i}`,
@@ -22,10 +24,11 @@ for (let i = 0; i < 6; i += 1) {
     price: Math.floor(Math.random() * 10) + 200,
     updatedAt: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
     createdAt: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
-    productList: getList(),
-    total: getList().length
+    productList,
+    total: productList.length
   })
 }
+
 function getOrderList (request) {
   const params = getParams(request.url)
 
