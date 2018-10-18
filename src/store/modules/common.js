@@ -1,7 +1,13 @@
+import { getBreadCrumbs } from '@/utils'
 
 const common = {
   state: {
-    opened: true
+    opened: true,
+    homeRoute: {
+      name: 'home',
+      title: '首页'
+    },
+    breadCrumbList: []
   },
   mutations: {
     TOGGLE_SIDER (state) {
@@ -12,6 +18,9 @@ const common = {
     },
     OPEN_SIDER (state) {
       state.opened = true
+    },
+    SET_BREADCRUMB (state, route) {
+      state.breadCrumbList = getBreadCrumbs(route, state.homeRoute)
     }
   },
   actions: {

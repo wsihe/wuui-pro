@@ -1,5 +1,7 @@
 const getters = {
   opened: state => state.common.opened,
+  breadCrumbList: state => state.common.breadCrumbList,
+
   name: state => state.user.name,
   token: state => state.user.token,
 

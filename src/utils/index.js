@@ -83,6 +83,25 @@ export function isEmpty (obj, excludeInherited) {
   return true
 }
 
+/**
+ * 将route转化为面包屑
+ * Convert route into breadcrumbs
+ */
+export const getBreadCrumbs = (route, homeRoute) => {
+  let routes = route.matched
+  let breadcrumbs = routes.reduce((list, item) => {
+    if (item.meta !== undefined && !item.meta.hideHeader) {
+      list.push({
+        name: item.name,
+        title: item.meta.title || '',
+        meta: item.meta
+      })
+    }
+    return list
+  }, [{...homeRoute}])
+  return breadcrumbs
+}
+
 export function debounce (func, wait, immediate) {
   let timeout, args, context, timestamp, result
 

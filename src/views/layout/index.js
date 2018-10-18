@@ -1,3 +1,6 @@
+export { default as wuLayout } from './layout.vue'
 export { default as wuHeader } from './header.vue'
 export { default as wuFooter } from './footer.vue'
 export { default as wuSider } from './sider.vue'
+export { default as PageHeader } from './pageLayout/pageHeader.vue'
+export { default as WuTabMenu } from './tabMenu.vue'

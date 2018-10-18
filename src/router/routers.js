@@ -18,7 +18,10 @@ export default [
         path: 'index',
         name: 'default',
         component: () => import('@/views/default/default.vue'),
-        meta: {title: '新页签'}
+        meta: {
+          title: '新页签',
+          hideHeader: true
+        }
       }
     ]
   },
@@ -33,7 +36,10 @@ export default [
         path: 'home',
         name: 'home',
         component: () => import('@/views/home/Home.vue'),
-        meta: {title: '首页'}
+        meta: {
+          title: '首页',
+          hideHeader: true
+        }
       }
     ]
   },
@@ -41,7 +47,7 @@ export default [
     path: '/product',
     name: 'product',
     meta: {
-      title: '商品'
+      title: '商品管理'
     },
     component: Main,
     children: [
@@ -63,7 +69,7 @@ export default [
     path: '/order',
     name: 'order',
     meta: {
-      title: '订单'
+      title: '订单中心'
     },
     component: Main,
     children: [
@@ -85,7 +91,7 @@ export default [
     path: '/customer',
     name: 'customer',
     meta: {
-      title: '客户'
+      title: '客户信息'
     },
     component: Main,
     children: [
@@ -101,7 +107,7 @@ export default [
     path: '/analysis',
     name: 'analysis',
     meta: {
-      title: '分析'
+      title: '数据分析'
     },
     component: Main,
     children: [
@@ -117,7 +123,7 @@ export default [
     path: '/setting',
     name: 'shop',
     meta: {
-      title: '微店'
+      title: '微店设置'
     },
     component: Main,
     children: [
@@ -133,7 +139,7 @@ export default [
     path: '/user',
     name: 'center',
     meta: {
-      title: '个人'
+      title: '个人中心'
     },
     component: Main,
     children: [

@@ -37,7 +37,7 @@ const menuData = [
     ]
   },
   {
-    name: '数据管理',
+    name: '数据分析',
     icon: 'news',
     path: 'analysis',
     children: [
