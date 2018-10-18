@@ -6,14 +6,17 @@
       wu-layout(type="header")
         wu-header
       wu-layout(type="content" v-if="!isTab")
-        router-view(:key="$route.fullPath")
+        .main-view
+          page-header(v-if="!$route.meta.hideHeader")
+          .main-view-content
+            router-view(:key="$route.fullPath")
 
       // 页签模式
       wu-layout(type="content" v-if="isTab")
-        .main-tab-container
+        .main-view
           wu-affix
             wu-tab-menu
-          .main-tab-content
+          .main-view-content
             keep-alive(:include="cachedViews")
               router-view(:key="$route.fullPath")
 
@@ -23,28 +26,48 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import wuLayout from './layout/layout'
-import {wuFooter, wuHeader, wuSider} from './layout'
-import WuTabMenu from './layout/tabMenu'
+import {
+  wuLayout,
+  wuFooter,
+  wuHeader,
+  wuSider,
+  WuTabMenu,
+  PageHeader
+} from './layout'
+
 export default {
   name: 'home',
   components: {
-    WuTabMenu,
     wuLayout,
-    wuSider,
+    wuFooter,
     wuHeader,
-    wuFooter
+    wuSider,
+    WuTabMenu,
+    PageHeader
   },
   data () {
     return {
       // isShowTab: false
     }
   },
+  mounted () {
+    this.setBreadCrumb(this.$route)
+  },
   computed: {
     ...mapGetters([
       'opened',
       'cachedViews'
     ])
+  },
+  watch: {
+    '$route' (route) {
+      this.setBreadCrumb(route)
+    }
+  },
+  methods: {
+    setBreadCrumb (route) {
+      this.$store.commit('SET_BREADCRUMB', route)
+    }
   }
 }
 </script>
@@ -57,8 +80,8 @@ export default {
     &.hasHideSider
       margin-left 64px
 
-    .main-tab-container
+    .main-view
       margin -24px -24px 0
-    .main-tab-content
+    .main-view-content
       margin 24px 24px 0
 </style>
