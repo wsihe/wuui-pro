@@ -76,7 +76,7 @@ export default [
       {
         path: 'overview',
         name: 'basicOrder',
-        component: () => import('@/views/order/basicOrder.vue'),
+        component: () => import('@/views/order/orderAnalysis.vue'),
         meta: { title: '订单概况' }
       },
       {

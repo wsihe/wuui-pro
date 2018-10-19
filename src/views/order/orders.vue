@@ -16,50 +16,50 @@
               el-button
                 span 高级
                 i.el-icon-arrow-down
-      table(:class="$style.table")
-        thead
-          tr
-            th
-              div(:class="$style.orderTitle")
-                span 近三个月订单
-                span 订单详情
-            th 客户
-            th 金额
-            th 状态
-            th 操作
-        tbody
-          template(v-for="order in orderList")
-            tr(:class="$style.step")
-              td(colspan="5")
-            tr(:class="$style.trTh")
-              td(colspan="5")
-                div(:class="$style.orderTop")
-                  span {{order.updatedAt | dateConvert}}
-                  span(:class="$style.label") 订单号：
-                  a(:class="$style.value") {{order.key}}
-            template(v-for="(product, index) in order.productList")
-              tr(:class="$style.trBd")
-                td
-                  div(:class="$style.product")
-                    div(:class="$style.avatar")
-                      img(src="~@/assets/avatar.jpg")
-                      span {{product.name}}
-                    span x {{product.num}}
-                template(v-if="index === 0")
-                  td(:rowspan="order.total") {{order.customer}}
-                  td(:rowspan="order.total") 总额：{{order.price | yuan}}
-                  td(:rowspan="order.total") {{order.status | orderStatus}}
-                  td(:rowspan="order.total") 处理
-          tr(:class="$style.trBd", v-if="!orderList.length")
-            td(colspan="6")
-              div 暂无相关订单
-      wu-pagination(:api="apiMethod", @list="queryOrderList", :params="params")
+      div(v-loading="loading")
+        table(:class="$style.table")
+          thead
+            tr
+              th
+                div(:class="$style.orderTitle")
+                  span 近三个月订单
+                  span 订单详情
+              th 客户
+              th 金额
+              th 状态
+              th 操作
+          tbody
+            template(v-for="order in orderList")
+              tr(:class="$style.step")
+                td(colspan="5")
+              tr(:class="$style.trTh")
+                td(colspan="5")
+                  div(:class="$style.orderTop")
+                    span {{order.updatedAt | dateConvert}}
+                    span(:class="$style.label") 订单号：
+                    a(:class="$style.value") {{order.key}}
+              template(v-for="(product, index) in order.productList")
+                tr(:class="$style.trBd")
+                  td
+                    div(:class="$style.product")
+                      div(:class="$style.avatar")
+                        img(src="~@/assets/avatar.jpg")
+                        span {{product.name}}
+                      span x {{product.num}}
+                  template(v-if="index === 0")
+                    td(:rowspan="order.total") {{order.customer}}
+                    td(:rowspan="order.total") 总额：{{order.price | yuan}}
+                    td(:rowspan="order.total") {{order.status | orderStatus}}
+                    td(:rowspan="order.total") 处理
+            tr(:class="$style.trBd", v-if="!orderList.length")
+              td(colspan="6")
+                div 暂无相关订单
+        wu-pagination(:api="apiMethod", @list="queryOrderList", :params="params")
 </template>
 
 <script>
 import { queryOrders } from '@/services/order'
 export default {
-  name: 'BasicList',
   components: {},
   props: {
   },
@@ -67,7 +67,7 @@ export default {
     return {
       status: '',
       name: '',
-      loading: false,
+      loading: true,
       params: {},
       apiMethod: queryOrders,
       orderList: []
@@ -122,6 +122,10 @@ export default {
             padding-left 20px
             padding-right 8px
             border none
+
+    :global(.el-loading-mask)
+      top 32px
+
     .table
       width 100%
       border-collapse collapse
