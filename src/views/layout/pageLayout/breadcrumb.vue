@@ -46,13 +46,13 @@ export default {
   .breadcrumb
     overflow hidden
 
-  .isActive
-    color $text-active-color
+    .isActive
+      color $text-active-color
 
-  :global
-    .el-breadcrumb
-      margin-bottom 15px
-    .el-breadcrumb__inner, .el-breadcrumb__inner a
-      font-weight normal
-      color $text-color
+    :global
+      .el-breadcrumb
+        margin-bottom 15px
+      .el-breadcrumb__inner, .el-breadcrumb__inner a
+        font-weight normal
+        color $text-color
 </style>
