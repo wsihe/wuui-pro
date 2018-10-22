@@ -96,12 +96,15 @@ export default {
         overflow-x hidden !important
       .el-scrollbar__view
         height 100%
+
+    :global
       .el-menu
         border-right none
         &:not(.el-menu--collapse)
           width 256px
-      .el-submenu .el-menu-item
-        padding-left 50px !important
+      .el-submenu
+        .el-menu-item
+          padding-left 50px !important
 
     .logo
       position relative

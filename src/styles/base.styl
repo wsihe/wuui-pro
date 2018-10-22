@@ -120,3 +120,14 @@ samp {
   height: 100%;
   max-height: 360px;
 }
+
+.el-submenu
+  &.is-opened i, &.is-opened span
+  &:hover i, &:hover span,
+  &.is-active i, &.is-active span
+    color #fff
+.el-menu-item
+  &:hover:not(.is-active)
+    color #fff !important
+  &.is-active
+    background-color #001121 !important
