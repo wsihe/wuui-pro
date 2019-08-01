@@ -1,11 +1,18 @@
-# 构建前需要修改 BASE_URL 路径
-# 构建dist
-npm run build
+#!/bin/bash -ex
 
-# 构建image
-# -t 是给镜像命名 . 是基于当前目录的Dockerfile来构建镜像
-docker build -t wuui-pro:0.0.1 .
+BUILD_ENV=${1}
 
-# 运行容器
+npm install
 
-docker container -d run --rm --name pro -p 80:80 wuui-pro:0.0.1
+VERSION=$(grep '"version":' package.json | cut -d\" -f4)
+if [[ "x$BUILD_ENV" != "xrelease" ]]
+then
+    VERSION="${VERSION}-dev"
+fi
+
+DATE=`date '+%Y-%m-%d %H:%M:%S'`
+HASH=`git rev-parse --short=10 HEAD`
+
+echo "=========================================="
+echo "Going to release version: v${VERSION} commit hash: ${HASH}"
+echo "=========================================="
